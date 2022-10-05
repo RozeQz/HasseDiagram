@@ -1,67 +1,21 @@
-import numpy as np
 import re
+import sys
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout
+from ui_mainwindow import Ui_MainWindow
+from binaryRelation import BinaryRelation
+from hasseDiagram import HasseDiagram
 
-# Класс Бинарного отношения
-class BinaryRelation:
-    def __init__(self, a, r):
-        self._A = a
-        self._R = r
-
-    def get_R(self) -> list:
-        return self._R
-
-    def set_R(self, r):
-        self._R = r
-
-    def get_A(self) -> set:
-        return self._A
-
-    def set_A(self, a):
-        self._A = a
-
-    # Матричное представление бинарного отношения
-    def get_matrix(self):
-        matrix = np.zeros((len(self._A), len(self._A)), dtype=int)
-        for (row, col) in self._R:
-            matrix[row - 1][col - 1] += 1
-        return matrix
-
-    # Транспонированная матрица
-    def get_transposed_matrix(self):
-        return self.get_matrix().T
-
-    # Рефлексивность
-    def is_reflexive(self) -> bool:
-        return set(self.get_matrix().diagonal()) == {1}
-
-    # Иррефлексивность
-    def is_irreflexive(self) -> bool:
-        return set(self.get_matrix().diagonal()) == {0}
-
-    # Симметричность
-    def is_symmetrical(self) -> bool:
-        return (self.get_matrix().T == self.get_matrix()).all()
-
-    # Транзитивность
-    def is_transitive(self) -> bool:
-        seconds_elements = {b for (a, b) in self._R}
-        for (a, b) in self._R:
-            for c in seconds_elements:
-                if (b, c) in self._R and (a, c) not in self._R:
-                    return False
-        return True
-
-    # Антисимметричность
-    def is_antisymm(self) -> bool:
-        for x in range(len(self._A)):
-            for y in range(x, len(self._A)):
-                if self.get_matrix()[x][y] and self.get_matrix()[y][x]:
-                    if x != y:
-                        return False
-        return True
-
+def ui_application():
+    app = QApplication(sys.argv)
+    window = QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(window)
+    window.show()
+    sys.exit(app.exec())
 
 def main():
+    ui_application()
+
     # A = {1, 2, 3, 4, 5}
     # R = [(1,2), (1,3), (1,4), (1,5), (2,4), (2,5), (3,4), (3,5), (4,5)]
 
@@ -100,6 +54,7 @@ def main():
     print("Бинарное отношение транзитивно!") if R1.is_transitive() else print("Бинарное отношение нетранзитивно!")
     print("Бинарное отношение антисимметрично!") if R1.is_antisymm() else print(
         "Бинарное отношение не антисимметрично!")
+    print(R1.class_of_relation())
 
 
 if __name__ == '__main__':
