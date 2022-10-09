@@ -137,9 +137,9 @@ class Ui_MainWindow(object):
         hd = self.create_diagram(binary)
         hd.draw()
 
-        self.widget = PlotCanvas(hd, self.centralwidget)  # Полотно для рисования
-        self.widget.setGeometry(QtCore.QRect(300, 0, 400, 400))
-        self.widget.setObjectName("widget")
+        # self.widget = PlotCanvas(hd, self.centralwidget)  # Полотно для рисования
+        # self.widget.setGeometry(QtCore.QRect(300, 0, 400, 400))
+        # self.widget.setObjectName("widget")
 
         if binary.is_reflexive():
             self.lbl_reflex.setText("Бинарное отношение рефлексивно!")
@@ -180,23 +180,24 @@ class Ui_MainWindow(object):
         return [A, R]
 
 
-class PlotCanvas(FigureCanvas):  # By inheriting the FigureCanvas class, this class is both a PyQt5 Qwidget and a Matplotlib FigureCanvas, which is the key to connecting pyqt5 and matplotlib
-    def __init__(self, hd, parent=None, width=500, height=500, dpi=100):
-        fig = Figure(figsize=(width, height), dpi=dpi)  # Create a Figure. Note: This Figure is a figure under matplotlib, not a figure under matplotlib.pyplot
-        self.axes = fig.add_subplot(111)  # Call the add_subplot method under figure, similar to the subplot method under matplotlib.pyplot
-        # self.plot(hd)
-        FigureCanvas.__init__(self, fig)  # Initialize the parent class
-        self.setParent(parent)
-        FigureCanvas.setSizePolicy(self, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
-        FigureCanvas.updateGeometry(self)
-
-    # def plot(self, hasse_diagram):
-    #     G = nx.Graph()
-    #     G.add_nodes_from(hasse_diagram.get_A())
-    #     G.add_edges_from(hasse_diagram.get_R())
-    #     pos = nx.spring_layout(G)
-    #     nx.draw_networkx_nodes(G, pos, node_size=500)
-    #     nx.draw_networkx_edges(G, pos, edgelist=G.edges(), edge_color='black')
-    #     nx.draw_networkx_labels(G, pos)
-    #     nx.draw(G, pos=nx.spring_layout(G), node_color='w', ax=self.axes, edge_color='b', with_labels=True, alpha=1, font_size=10, node_size=20, arrows=True)
-    #     plt.show()
+# class PlotCanvas(FigureCanvas):  # By inheriting the FigureCanvas class, this class is both a PyQt5 Qwidget and a Matplotlib FigureCanvas, which is the key to connecting pyqt5 and matplotlib
+#     def __init__(self, hd, parent=None, width=500, height=500, dpi=100):
+#         fig = Figure(figsize=(width, height), dpi=dpi)  # Create a Figure. Note: This Figure is a figure under matplotlib, not a figure under matplotlib.pyplot
+#         self.axes = fig.add_subplot(111)  # Call the add_subplot method under figure, similar to the subplot method under matplotlib.pyplot
+#         self.plot(hd)
+#         FigureCanvas.__init__(self, fig)  # Initialize the parent class
+#         self.setParent(parent)
+#         FigureCanvas.setSizePolicy(self, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+#         FigureCanvas.updateGeometry(self)
+#
+#     def plot(self, hasse_diagram):
+#         G = nx.Graph()
+#         G.add_nodes_from(hasse_diagram.get_A())
+#         G.add_edges_from(hasse_diagram.get_R())
+#         pos = nx.spring_layout(G)
+#         nx.draw_networkx_nodes(G, pos, node_size=500)
+#         nx.draw_networkx_edges(G, pos, edgelist=G.edges(), edge_color='black')
+#         nx.draw_networkx_labels(G, pos)
+#         nx.draw(G, pos=nx.spring_layout(G), node_color='w', ax=self.axes, edge_color='b', with_labels=True, alpha=1, font_size=10, node_size=20, arrows=True)
+#         plt.show()
+#         hasse_diagram.draw()

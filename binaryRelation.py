@@ -21,8 +21,9 @@ class BinaryRelation:
     # Матричное представление бинарного отношения
     def get_matrix(self):
         matrix = np.zeros((len(self._A), len(self._A)), dtype=int)
+        arr = list(self._A)
         for (row, col) in self._R:
-            matrix[row - 1][col - 1] += 1
+            matrix[arr.index(row)][arr.index(col)] += 1
         return matrix
 
     # Транспонированная матрица
@@ -43,10 +44,10 @@ class BinaryRelation:
 
     # Транзитивность
     def is_transitive(self) -> bool:
-        seconds_elements = {b for (a, b) in self._R}
+        seconds_elements = {b for (a, b) in self._R}    # множество вторых элементов
         for (a, b) in self._R:
             for c in seconds_elements:
-                if (b, c) in self._R and (a, c) not in self._R:
+                if (b, c) in self._R and (a, c) not in self._R:     # if xRy and yRz => xRz
                     return False
         return True
 
@@ -74,3 +75,39 @@ class BinaryRelation:
                     return "strict preorder"
         else:
             return "not an order"
+
+    def second_elements(self, ls, reverse=False) -> dict:       # reverse=True - обратное транзитивное замыкание
+        result = {}
+        for i in self._A:
+            result.setdefault(i, [])
+        for first, second in ls:
+            if not reverse:
+                result.setdefault(first, []).append(second)
+            else:
+                result.setdefault(second, []).append(first)
+        return result
+
+    def get_dominance_list(self) -> list:
+        edge_list = [(x, y) for x, y in self._R if x != y]
+        new_edge_list = edge_list.copy()
+        for (x, y) in edge_list:
+            for z in list(self._A):
+                if ((x, z) in edge_list) and ((z, y) in edge_list):
+                    try:
+                        new_edge_list.remove((x, y))
+                    except ValueError:
+                        pass
+        return new_edge_list
+
+    def dominance_levels(self) -> dict:
+        dominance_dict = self.second_elements(self.get_dominance_list(), reverse=True)
+        levels_dict = {}
+        for k, v in dominance_dict.items():
+            if not v:
+                levels_dict.setdefault(1, []).append(k)  # уровень доминирования = 1, если элемент ни над кем не доминирует
+        for k, v in dominance_dict.items():
+            for i in range(1, len(levels_dict) + 1):
+                if len(set(v).intersection(levels_dict[i])) > 0:
+                    levels_dict.setdefault(i + 1, []).append(k)  # если элемент доминирует над элементом под ним, то элемент находится на следующем уровне доминирования
+        return levels_dict
+
