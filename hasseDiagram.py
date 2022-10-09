@@ -49,7 +49,13 @@ class HasseDiagram(BinaryRelation):
               self.second_elements(self.get_dominance_list(), reverse=True))
         G.add_edges_from(self.get_dominance_list())
         print(pos)
-        plt.figure()
+
+        # Удаляем ненужные кнопки на панели инструментов
+        unwanted_buttons = ['pan', 'help', 'subplots']
+        fig = plt.figure()
+        for button in unwanted_buttons:
+            fig.canvas.manager.toolmanager.remove_tool(button)
+
         if (self.class_of_relation() != 'not an order'):
             options = {
                 "arrowsize": 18,
