@@ -44,9 +44,9 @@ class BinaryRelation:
 
     # Транзитивность
     def is_transitive(self) -> bool:
-        seconds_elements = {b for (a, b) in self._R}    # множество вторых элементов
+        second_elements = {b for (a, b) in self._R}    # множество вторых элементов
         for (a, b) in self._R:
-            for c in seconds_elements:
+            for c in second_elements:
                 if (b, c) in self._R and (a, c) not in self._R:     # if xRy and yRz => xRz
                     return False
         return True
@@ -100,14 +100,17 @@ class BinaryRelation:
         return new_edge_list
 
     def dominance_levels(self) -> dict:
-        dominance_dict = self.second_elements(self.get_dominance_list(), reverse=True)
+        dominance_dict = dict(sorted(self.second_elements(self.get_dominance_list(), reverse=True).items()))
         levels_dict = {}
-        for k, v in dominance_dict.items():
+        for k, v in list(dominance_dict.items()):
             if not v:
-                levels_dict.setdefault(1, []).append(k)  # уровень доминирования = 1, если элемент ни над кем не доминирует
-        for k, v in dominance_dict.items():
-            for i in range(1, len(levels_dict) + 1):
-                if len(set(v).intersection(levels_dict[i])) > 0:
-                    levels_dict.setdefault(i + 1, []).append(k)  # если элемент доминирует над элементом под ним, то элемент находится на следующем уровне доминирования
-        return levels_dict
+                levels_dict.setdefault(1, []).append(k)     # уровень доминирования = 1, если элемент ни над кем не доминирует
+                dominance_dict.pop(k)                       # удаляем рассмотренную вершину
 
+        while dominance_dict:
+            for k, v in list(dominance_dict.items()):
+                for i in range(1, len(levels_dict) + 1):
+                    if len(set(v).intersection(levels_dict[i])) > 0:
+                        levels_dict.setdefault(i + 1, []).append(k)     # если элемент доминирует над элементом под ним, то элемент находится на следующем уровне доминирования
+                        dominance_dict.pop(k)                           # удаляем рассмотренную вершину
+        return levels_dict

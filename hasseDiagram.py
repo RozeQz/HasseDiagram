@@ -1,6 +1,7 @@
 from binaryRelation import BinaryRelation
 import networkx as nx
 import matplotlib.pyplot as plt
+plt.rcParams['toolbar'] = 'toolmanager'
 
 DIAGRAM_HEIGHT = 50
 DIAGRAM_WIDTH = 50
@@ -25,9 +26,6 @@ class HasseDiagram(BinaryRelation):
     def draw(self):
         pos = {}
         print(self.second_elements(self._R))
-        # origin = -len(list(self.result.keys()))-5
-        randlist = list(range(1, len(list(self.second_elements(self._R).keys())) + 1))
-        print(randlist)
 
         delta_height = DIAGRAM_HEIGHT / len(self.dominance_levels())
         delta_width = 0

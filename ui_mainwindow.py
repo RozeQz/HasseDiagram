@@ -163,19 +163,20 @@ class Ui_MainWindow(object):
 
     def input(self) -> list:    # Ввод данных
         new_R = []
-        A = set(map(int, re.findall(r'\w+', self.edt_setA.toPlainText())))  # Ввод числового множества
+        A = set(map(str, re.findall(r'\w+', self.edt_setA.toPlainText())))  # Ввод числового множества
         R = re.findall(r'\([^)]*\)', self.edt_setR.toPlainText())  # Ввод бинарного отношения перечислением пар TODO: сделать валидацию R ⊆ A^2
         for i in R:
             R_str = tuple(map(str, re.findall(r'\w+\.?\w*', i)))  # Преобразуем в пару строковых значений
-            try:
-                R_int = tuple(map(int, R_str))  # Преобразуем в пару целочисленных значений
-                new_R.append(R_int)
-            except ValueError:
-                try:
-                    R_float = tuple(map(float, R_str))  # Преобразуем в пару чисел с плавающей запятой
-                    new_R.append(R_float)
-                except ValueError:
-                    new_R.append(R_str)
+            new_R.append(R_str)
+            # try:
+            #     R_int = tuple(map(int, R_str))  # Преобразуем в пару целочисленных значений
+            #     new_R.append(R_int)
+            # except ValueError:
+            #     try:
+            #         R_float = tuple(map(float, R_str))  # Преобразуем в пару чисел с плавающей запятой
+            #         new_R.append(R_float)
+            #     except ValueError:
+            #         new_R.append(R_str)
         R = new_R
         return [A, R]
 
