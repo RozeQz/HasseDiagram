@@ -58,12 +58,14 @@ class HasseDiagram(BinaryRelation):
             options = {
                 "arrowsize": 18,
                 "font_size": 15,
-                "font_color": "white",
-                "node_size": 600,
-                "node_color": "blue",
+                "font_color": "black",
+                "node_size": 1000,
+                "node_color": "tab:blue", #148aff tab:blue
                 "edgecolors": "black",
-                "with_labels": True
+                "with_labels": True,
+                "width": 2
             }
+            # plt.title("Диаграмма Хассе")
             nx.draw(G, pos, **options)
             plt.show()
         else:
