@@ -109,8 +109,21 @@ class BinaryRelation:
 
         while dominance_dict:
             for k, v in list(dominance_dict.items()):
-                for i in range(1, len(levels_dict) + 1):
-                    if len(set(v).intersection(levels_dict[i])) > 0:
-                        levels_dict.setdefault(i + 1, []).append(k)     # если элемент доминирует над элементом под ним, то элемент находится на следующем уровне доминирования
-                        dominance_dict.pop(k)                           # удаляем рассмотренную вершину
+                for el in v:
+                    for i in range(1, len(levels_dict) + 1):
+                        if el in levels_dict[i]:
+                            levels_dict.setdefault(i + 1, []).append(k)     # если элемент доминирует над элементом под ним, то элемент находится на следующем уровне доминирования
+                            if len(v) > 1:
+                                dominance_dict[k].remove(el)                # удаляем рассмотренную вершину
+                            else:
+                                dominance_dict.pop(k)                       # удаляем рассмотренную вершину
+
+        nodes = set()
+        for k, v in list(reversed(levels_dict.items())):
+            for el in v:
+                if el in nodes:
+                    levels_dict[k].remove(el)
+                else:
+                    nodes.add(el)
+
         return levels_dict
