@@ -136,7 +136,9 @@ class BinaryRelation:
         for k, v in list(reversed(levels_dict.items())):
             for el in v:
                 if el in nodes:
-                    levels_dict[k].remove(el)
+                    temp = []
+                    [temp.append(x) for x in levels_dict[k] if x not in temp]
+                    levels_dict[k] = temp
                 else:
                     nodes.add(el)
 

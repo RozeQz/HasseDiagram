@@ -23,21 +23,23 @@ class HasseDiagram(BinaryRelation):
     def set_A(self, a):
         self._A = a
 
-    def draw(self):
+    # private метод задачи позиции вершин диаграммы
+    def __set_position(self) -> dict:
         pos = {}
-        print(self.second_elements(self._R))
-
         delta_height = DIAGRAM_HEIGHT / len(self.dominance_levels())
         delta_width = 0
         for k, v in self.dominance_levels().items():
-            try:
-                delta_width = DIAGRAM_WIDTH / len(v)
-            except (ZeroDivisionError):
-                pass
-            count = 0
+            delta_width = DIAGRAM_WIDTH / (len(v) + 1)
+            count = 1
             for i in v:
                 pos.setdefault(i, (count * delta_width, (k - 1) * delta_height))
                 count += 1
+        return pos
+
+    def draw(self):
+        print(self.second_elements(self._R))
+
+        pos = self.__set_position()   # задаем позиции вершин
 
         G = nx.Graph()
         G.add_nodes_from(self._A)
@@ -47,7 +49,6 @@ class HasseDiagram(BinaryRelation):
               self.second_elements(self.get_dominance_list(), reverse=True))
         G.add_edges_from(self.get_dominance_list())
         print(self.dominance_levels())
-        print(pos)
 
         # Удаляем ненужные кнопки на панели инструментов
         unwanted_buttons = ['pan', 'help', 'subplots']
@@ -69,5 +70,3 @@ class HasseDiagram(BinaryRelation):
             # plt.title("Диаграмма Хассе")
             nx.draw(G, pos, **options)
             plt.show()
-        else:
-            return "There are conditions that are not provided."
