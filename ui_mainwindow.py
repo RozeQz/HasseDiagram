@@ -201,7 +201,6 @@ class Ui_MainWindow(object):
     def output(self):
         binary = self.create_binary_relation()
         hd = self.create_diagram(binary)
-        hd.draw()
 
         # self.widget = PlotCanvas(hd, self.centralwidget)  # Полотно для рисования
         # self.widget.setGeometry(QtCore.QRect(300, 0, 400, 400))
@@ -229,15 +228,21 @@ class Ui_MainWindow(object):
                                              "font-weight: bold;\n"
                                              "font-size: 12;\n"
                                              "font-family: Arial;")
+            hd.draw()
+        else:
+            self.lbl_bin_class.setStyleSheet("color: rgb(184, 0, 0);\n"
+                                             "font-weight: bold;\n"
+                                             "font-size: 12;\n"
+                                             "font-family: Arial;")
 
-        if binary.class_of_relation():
-            if "unknown": self.lbl_bin_class.setText("Неизвестный класс")
-            if "tolerance": self.lbl_bin_class.setText("Эквивалентность")
-            if "equivalence": self.lbl_bin_class.setText("Толерантность")
-            if "partial order": self.lbl_bin_class.setText("Частичный порядок")
-            if "preorder": self.lbl_bin_class.setText("Предпорядок")
-            if "strict order": self.lbl_bin_class.setText("Строгий порядок")
-            if "strict preorder": self.lbl_bin_class.setText("Строгий предпорядок")
+        bin_class = binary.class_of_relation()
+        if bin_class == "unknown": self.lbl_bin_class.setText("Не входит ни в один класс")
+        if bin_class == "tolerance": self.lbl_bin_class.setText("Эквивалентность")
+        if bin_class == "equivalence": self.lbl_bin_class.setText("Толерантность")
+        if bin_class == "partial order": self.lbl_bin_class.setText("Частичный порядок")
+        if bin_class == "preorder": self.lbl_bin_class.setText("Предпорядок")
+        if bin_class == "strict order": self.lbl_bin_class.setText("Строгий порядок")
+        if bin_class == "strict preorder": self.lbl_bin_class.setText("Строгий предпорядок")
 
     def button_click(self, win):
         self.output()

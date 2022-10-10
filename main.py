@@ -21,7 +21,7 @@ def main():
 
     # Ввод данных
     new_R = []
-    A = set(map(int, re.findall(r'\w+', input())))  # Ввод числового множества
+    A = list(map(str, re.findall(r'\w+', input())))  # Ввод числового множества
     R = re.findall(r'\([^)]*\)', input())           # Ввод бинарного отношения перечислением пар
     for i in R:
         R_str = tuple(map(str, re.findall(r'\w+\.?\w*', i)))    # Преобразуем в пару строковых значений

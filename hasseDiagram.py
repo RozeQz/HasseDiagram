@@ -17,7 +17,7 @@ class HasseDiagram(BinaryRelation):
     def set_R(self, r):
         self._R = r
 
-    def get_A(self) -> set:
+    def get_A(self) -> list:
         return self._A
 
     def set_A(self, a):
@@ -46,6 +46,7 @@ class HasseDiagram(BinaryRelation):
         print("Словарь доминации (ключ - кто, значения - над кем): ",
               self.second_elements(self.get_dominance_list(), reverse=True))
         G.add_edges_from(self.get_dominance_list())
+        print(self.dominance_levels())
         print(pos)
 
         # Удаляем ненужные кнопки на панели инструментов
