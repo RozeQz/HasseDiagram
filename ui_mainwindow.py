@@ -10,6 +10,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 from binaryRelation import BinaryRelation
 from hasseDiagram import HasseDiagram
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -146,7 +147,7 @@ class Ui_MainWindow(object):
         self.lbl_bin_class.setFont(font)
         self.lbl_bin_class.setStyleSheet("color: rgb(184, 0, 0);\n"
                                          "font-weight: bold;\n"
-                                         "font-size: 10;\n"
+                                         "font-size: 12;\n"
                                          "font-family: Arial;")
         self.lbl_bin_class.setText("")
         font.setPointSize(9)
@@ -166,18 +167,20 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Диаграмма Хассе"))
-        self.edt_setR.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Arial\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
+        self.edt_setR.setHtml(_translate("MainWindow",
+                                         "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                         "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                         "p, li { white-space: pre-wrap; }\n"
+                                         "</style></head><body style=\" font-family:\'Arial\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
         self.edt_setR.setPlaceholderText(_translate("MainWindow", "Введите бинарное отношение R:"))
         self.lbl_props.setText(_translate("MainWindow", "Свойства бинарного отношения:"))
-        self.edt_setA.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Arial\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
+        self.edt_setA.setHtml(_translate("MainWindow",
+                                         "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                         "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                         "p, li { white-space: pre-wrap; }\n"
+                                         "</style></head><body style=\" font-family:\'Arial\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
         self.edt_setA.setPlaceholderText(_translate("MainWindow", "Введите множество А:"))
         self.btn_run.setText(_translate("MainWindow", "Выполнить"))
         self.lbl_class.setText(_translate("MainWindow", "Класс бинарного отношения:"))
@@ -205,31 +208,36 @@ class Ui_MainWindow(object):
         # self.widget.setObjectName("widget")
 
         if binary.is_reflexive():
-            self.lbl_reflex.setText("Бинарное отношение рефлексивно!")
+            self.lbl_reflex.setText("   • Рефлексивно!")
         elif binary.is_irreflexive():
-            self.lbl_reflex.setText("Бинарное отношение иррефлексивно!")
+            self.lbl_reflex.setText("   • Иррефлексивно!")
         else:
-            self.lbl_reflex.setText("Бинарное отношение нерефлексивно!")
+            self.lbl_reflex.setText("   • Нерефлексивно!")
+
         self.lbl_symm.setText(
-            "Бинарное отношение симметрично!") if binary.is_symmetrical() else self.lbl_symm.setText(
-            "Бинарное отношение несимметрично!")
+            "   • Симметрично!") if binary.is_symmetrical() else self.lbl_symm.setText(
+            "   • Несимметрично!")
         self.lbl_trans.setText(
-            "Бинарное отношение транзитивно!") if binary.is_transitive() else self.lbl_trans.setText(
-            "Бинарное отношение нетранзитивно!")
+            "   • Транзитивно!") if binary.is_transitive() else self.lbl_trans.setText(
+            "   • Нетранзитивно!")
         self.lbl_antisym.setText(
-            "Бинарное отношение антисимметрично!") if binary.is_antisymm() else self.lbl_antisym.setText(
-            "Бинарное отношение не антисимметрично!")
+            "   • Антисимметрично!") if binary.is_antisymm() else self.lbl_antisym.setText(
+            "   • Не антисимметрично!")
+
+        if binary.is_order():
+            self.lbl_bin_class.setStyleSheet("color: #008000;\n"
+                                             "font-weight: bold;\n"
+                                             "font-size: 12;\n"
+                                             "font-family: Arial;")
+
         if binary.class_of_relation():
-            if "not an order":
-                self.lbl_bin_class.setText("Не является порядком")
-            if "partial order":
-                self.lbl_bin_class.setText("Частичный порядок")
-            if "preorder":
-                self.lbl_bin_class.setText("Предпорядок")
-            if "strict order":
-                self.lbl_bin_class.setText("Строгий порядок")
-            if "strict preorder":
-                self.lbl_bin_class.setText("Строгий предпорядок")
+            if "unknown": self.lbl_bin_class.setText("Неизвестный класс")
+            if "tolerance": self.lbl_bin_class.setText("Эквивалентность")
+            if "equivalence": self.lbl_bin_class.setText("Толерантность")
+            if "partial order": self.lbl_bin_class.setText("Частичный порядок")
+            if "preorder": self.lbl_bin_class.setText("Предпорядок")
+            if "strict order": self.lbl_bin_class.setText("Строгий порядок")
+            if "strict preorder": self.lbl_bin_class.setText("Строгий предпорядок")
 
     def button_click(self, win):
         self.output()
@@ -248,15 +256,6 @@ class Ui_MainWindow(object):
         for i in R:
             R_str = tuple(map(str, re.findall(r'\w+\.?\w*', i)))  # Преобразуем в пару строковых значений
             new_R.append(R_str)
-            # try:
-            #     R_int = tuple(map(int, R_str))  # Преобразуем в пару целочисленных значений
-            #     new_R.append(R_int)
-            # except ValueError:
-            #     try:
-            #         R_float = tuple(map(float, R_str))  # Преобразуем в пару чисел с плавающей запятой
-            #         new_R.append(R_float)
-            #     except ValueError:
-            #         new_R.append(R_str)
         R = new_R
         return [A, R]
 

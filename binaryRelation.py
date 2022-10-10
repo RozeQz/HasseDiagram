@@ -60,9 +60,13 @@ class BinaryRelation:
                         return False
         return True
 
+    # Является ли порядком
+    def is_order(self) -> bool:
+        return self.is_transitive() and not self.is_symmetrical()
+
     # Классы бинарных отношений
     def class_of_relation(self) -> str:
-        if self.is_transitive():
+        if self.is_order():
             if self.is_reflexive():
                 if self.is_antisymm():
                     return "partial order"
@@ -74,9 +78,17 @@ class BinaryRelation:
                 else:
                     return "strict preorder"
         else:
-            return "not an order"
+            if self.is_reflexive() and self.is_symmetrical():
+                if self.is_transitive():
+                    return "equivalence"
+                else:
+                    return "tolerance"
+            else:
+                return "unknown"
 
-    def second_elements(self, ls, reverse=False) -> dict:       # reverse=True - обратное транзитивное замыкание
+    # Словарь вторых элементов пары (key = первый элемент пары; value = массив вторых элементов)
+    # reverse=True - словарь первых элементов пары
+    def second_elements(self, ls, reverse=False) -> dict:
         result = {}
         for i in self._A:
             result.setdefault(i, [])
@@ -87,6 +99,7 @@ class BinaryRelation:
                 result.setdefault(second, []).append(first)
         return result
 
+    # Массив доминирования (соединения на диаграмме Хассе)
     def get_dominance_list(self) -> list:
         edge_list = [(x, y) for x, y in self._R if x != y]
         new_edge_list = edge_list.copy()
@@ -99,6 +112,7 @@ class BinaryRelation:
                         pass
         return new_edge_list
 
+    # Словарь уровней доминирования (key = уровень; value = массив вершин)
     def dominance_levels(self) -> dict:
         dominance_dict = dict(sorted(self.second_elements(self.get_dominance_list(), reverse=True).items()))
         levels_dict = {}
