@@ -186,7 +186,7 @@ class Ui_MainWindow(object):
         self.lbl_class.setText(_translate("MainWindow", "Класс бинарного отношения:"))
 
     def create_diagram(self, bin_rel) -> HasseDiagram:
-        print("Диаграмма хассе на множестве ", bin_rel.get_A())
+        print("Диаграмма хассе на множестве ", bin_rel.A)
         return HasseDiagram(bin_rel)
 
     def add_functions(self, win):

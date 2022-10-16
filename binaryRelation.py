@@ -6,23 +6,27 @@ class BinaryRelation:
         self._A = a
         self._R = r
 
-    def get_R(self) -> list:
+    @property
+    def R(self) -> list:
         return self._R
 
-    def set_R(self, r):
+    @R.setter
+    def R(self, r):
         self._R = r
 
-    def get_A(self) -> set:
+    @property
+    def A(self) -> set:
         return self._A
 
-    def set_A(self, a):
+    @A.setter
+    def A(self, a):
         self._A = a
 
     # Матричное представление бинарного отношения
     def get_matrix(self):
         matrix = np.zeros((len(self._A), len(self._A)), dtype=int)
-        arr = list(self._A)
-        for (row, col) in self._R:
+        arr = list(self.A)
+        for (row, col) in self.R:
             matrix[arr.index(row)][arr.index(col)] += 1
         return matrix
 
@@ -44,17 +48,17 @@ class BinaryRelation:
 
     # Транзитивность
     def is_transitive(self) -> bool:
-        second_elements = {b for (a, b) in self._R}    # множество вторых элементов
-        for (a, b) in self._R:
+        second_elements = {b for (a, b) in self.R}    # множество вторых элементов
+        for (a, b) in self.R:
             for c in second_elements:
-                if (b, c) in self._R and (a, c) not in self._R:     # if xRy and yRz => xRz
+                if (b, c) in self.R and (a, c) not in self.R:     # if xRy and yRz => xRz
                     return False
         return True
 
     # Антисимметричность
     def is_antisymm(self) -> bool:
-        for x in range(len(self._A)):
-            for y in range(x, len(self._A)):
+        for x in range(len(self.A)):
+            for y in range(x, len(self.A)):
                 if self.get_matrix()[x][y] and self.get_matrix()[y][x]:
                     if x != y:
                         return False
@@ -90,7 +94,7 @@ class BinaryRelation:
     # reverse=True - словарь первых элементов пары
     def second_elements(self, ls, reverse=False) -> dict:
         result = {}
-        for i in self._A:
+        for i in self.A:
             result.setdefault(i, [])
         for first, second in ls:
             if not reverse:
@@ -101,10 +105,10 @@ class BinaryRelation:
 
     # Массив доминирования (соединения на диаграмме Хассе)
     def get_dominance_list(self) -> list:
-        edge_list = [(x, y) for x, y in self._R if x != y]
+        edge_list = [(x, y) for x, y in self.R if x != y]
         new_edge_list = edge_list.copy()
         for (x, y) in edge_list:
-            for z in list(self._A):
+            for z in list(self.A):
                 if ((x, z) in edge_list) and ((z, y) in edge_list):
                     try:
                         new_edge_list.remove((x, y))
