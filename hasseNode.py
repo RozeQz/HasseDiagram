@@ -2,33 +2,33 @@
 class HasseNode:
     def __init__(self, name, pos, level, options=None):
         # self._options = options if options is not None else {"node_color": "tab:blue"} #148aff tab:blue
-        self._name = name
-        self._pos = pos
-        self._level = level
+        self.__name = name
+        self.__pos = pos
+        self.__level = level
 
     @property
     def name(self):
-        return self._name
+        return self.__name
 
     @name.setter
     def name(self, n):
-        self._name = n
+        self.__name = n
 
     @property
     def pos(self):
-        return self._pos
+        return self.__pos
 
     @pos.setter
     def pos(self, p):
-        self._pos = p
+        self.__pos = p
 
     @property
     def level(self):
-        return self._level
+        return self.__level
 
     @level.setter
     def level(self, lvl):
-        self._level = lvl
+        self.__level = lvl
 
     # @property
     # def options(self):

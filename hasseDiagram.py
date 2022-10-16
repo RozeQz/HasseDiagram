@@ -1,6 +1,4 @@
 import networkx as nx
-import matplotlib.pyplot as plt
-plt.rcParams['toolbar'] = 'toolmanager'
 from hasseNode import HasseNode
 
 DIAGRAM_HEIGHT = 50
@@ -10,14 +8,14 @@ DIAGRAM_WIDTH = 50
 class HasseDiagram:
     # Используется агрегация (HasseDiagram не может существовать без BinaryRelation)
     def __init__(self, bin_rel):
-        self._bin_rel = bin_rel
+        self.__bin_rel = bin_rel
 
     # Массив доминирования (соединения на диаграмме Хассе)
     def __get_dominance_list(self) -> list:
-        edge_list = [(x, y) for x, y in self._bin_rel.R if x != y]
+        edge_list = [(x, y) for x, y in self.__bin_rel.R if x != y]
         new_edge_list = edge_list.copy()
         for (x, y) in edge_list:
-            for z in list(self._bin_rel.A):
+            for z in list(self.__bin_rel.A):
                 if ((x, z) in edge_list) and ((z, y) in edge_list):
                     try:
                         new_edge_list.remove((x, y))
@@ -27,7 +25,7 @@ class HasseDiagram:
 
     # Словарь уровней доминирования (key = уровень; value = массив вершин)
     def __dominance_levels(self) -> dict:
-        dominance_dict = dict(sorted(self._bin_rel.second_elements(self.__get_dominance_list(), reverse=True).items()))
+        dominance_dict = dict(sorted(self.__bin_rel.second_elements(self.__get_dominance_list(), reverse=True).items()))
         levels_dict = {}
         for k, v in list(dominance_dict.items()):
             if not v:
@@ -59,31 +57,31 @@ class HasseDiagram:
 
     # private метод создания вершин диаграммы
     def __create_nodes(self):
-        self._nodes = []
+        self.__nodes = []
         delta_height = DIAGRAM_HEIGHT / len(self.__dominance_levels())
         for k, v in self.__dominance_levels().items():
             delta_width = DIAGRAM_WIDTH / (len(v) + 1)
             count = 1
             for i in v:
-                self._nodes.append(HasseNode(i, (count * delta_width, (k - 1) * delta_height), k))
+                self.__nodes.append(HasseNode(i, (count * delta_width, (k - 1) * delta_height), k))
                 count += 1
 
     # Словарь для метода draw библиотеки networkx
     def __get_nodes_to_draw(self) -> dict:
         position = {}
-        for x in self._nodes:
+        for x in self.__nodes:
             position.setdefault(x.name, x.pos)
         return position
 
     def get_nodes_by_level(self, lvl) -> list:
         arr = []
-        for x in self._nodes:
+        for x in self.__nodes:
             if x.level == lvl:
                 arr.append(x)
         return arr
 
     def get_node_by_name(self, n) -> HasseNode:
-        for x in self._nodes:
+        for x in self.__nodes:
             if x.name == n:
                 return x
 
@@ -91,30 +89,22 @@ class HasseDiagram:
         self.__create_nodes()  # задаем позиции вершин
 
         G = nx.Graph()
-        G.add_nodes_from(self._bin_rel.A)
-        print("Словарь доминации (ключ - над кем, значения - кто): ", self._bin_rel.second_elements(
+        G.add_nodes_from(self.__bin_rel.A)
+        print("Словарь доминации (ключ - над кем, значения - кто): ", self.__bin_rel.second_elements(
             self.__get_dominance_list()))
         print("Словарь доминации (ключ - кто, значения - над кем): ",
-              self._bin_rel.second_elements(self.__get_dominance_list(), reverse=True))
+              self.__bin_rel.second_elements(self.__get_dominance_list(), reverse=True))
         G.add_edges_from(self.__get_dominance_list())
 
-        # Удаляем ненужные кнопки на панели инструментов
-        unwanted_buttons = ['pan', 'help', 'subplots']
-        fig = plt.figure()
-        for button in unwanted_buttons:
-            fig.canvas.manager.toolmanager.remove_tool(button)
-
-        if (self._bin_rel.class_of_relation() != 'not an order'):
-            options = {
-                "arrowsize": 18,
-                "font_size": 15,
-                "font_color": "black",
-                "node_size": 1000,
-                "node_color": "tab:blue", #148aff tab:blue
-                "edgecolors": "black",
-                "with_labels": True,
-                "width": 2
-            }
-            # plt.title("Диаграмма Хассе")
-            nx.draw(G, self.__get_nodes_to_draw(), **options)
-            plt.show()
+        options = {
+            "arrowsize": 18,
+            "font_size": 15,
+            "font_color": "black",
+            "node_size": 1000,
+            "node_color": "tab:blue", #148aff tab:blue
+            "edgecolors": "black",
+            "with_labels": True,
+            "width": 2
+        }
+        # plt.title("Диаграмма Хассе")
+        nx.draw(G, self.__get_nodes_to_draw(), **options)

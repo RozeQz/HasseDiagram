@@ -3,28 +3,28 @@ import numpy as np
 # Класс Бинарного отношения
 class BinaryRelation:
     def __init__(self, a, r):
-        self._A = a
-        self._R = r
+        self.__A = a
+        self.__R = r
 
     @property
     def R(self) -> list:
-        return self._R
+        return self.__R
 
     @R.setter
     def R(self, r):
-        self._R = r
+        self.__R = r
 
     @property
     def A(self) -> set:
-        return self._A
+        return self.__A
 
     @A.setter
     def A(self, a):
-        self._A = a
+        self.__A = a
 
     # Матричное представление бинарного отношения
     def get_matrix(self):
-        matrix = np.zeros((len(self._A), len(self._A)), dtype=int)
+        matrix = np.zeros((len(self.__A), len(self.__A)), dtype=int)
         arr = list(self.A)
         for (row, col) in self.R:
             matrix[arr.index(row)][arr.index(col)] += 1
