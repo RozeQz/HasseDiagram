@@ -200,7 +200,6 @@ class Ui_MainWindow(object):
 
     def output(self):
         binary = self.create_binary_relation()
-        hd = self.create_diagram(binary)
 
         # self.widget = PlotCanvas(hd, self.centralwidget)  # Полотно для рисования
         # self.widget.setGeometry(QtCore.QRect(300, 0, 400, 400))
@@ -224,6 +223,7 @@ class Ui_MainWindow(object):
             "   • Не антисимметрично!")
 
         if binary.is_order():
+            hd = self.create_diagram(binary)
             self.lbl_bin_class.setStyleSheet("color: #008000;\n"
                                              "font-weight: bold;\n"
                                              "font-size: 12;\n"
