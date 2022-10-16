@@ -1,11 +1,13 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 plt.rcParams['toolbar'] = 'toolmanager'
+from hasseNode import HasseNode
 
 DIAGRAM_HEIGHT = 50
 DIAGRAM_WIDTH = 50
 
-class HasseDiagram():
+# Класс Диаграммы Хассе
+class HasseDiagram:
     # Используется агрегация (HasseDiagram не может существовать без BinaryRelation)
     def __init__(self, bin_rel):
         self._bin_rel = bin_rel
@@ -55,32 +57,46 @@ class HasseDiagram():
 
         return levels_dict
 
-    # private метод задачи позиции вершин диаграммы
-    def __set_position(self) -> dict:
-        pos = {}
+    # private метод создания вершин диаграммы
+    def __create_nodes(self):
+        self._nodes = []
         delta_height = DIAGRAM_HEIGHT / len(self.__dominance_levels())
         for k, v in self.__dominance_levels().items():
             delta_width = DIAGRAM_WIDTH / (len(v) + 1)
             count = 1
             for i in v:
-                pos.setdefault(i, (count * delta_width, (k - 1) * delta_height))
+                self._nodes.append(HasseNode(i, (count * delta_width, (k - 1) * delta_height), k))
                 count += 1
-        return pos
+
+    # Словарь для метода draw библиотеки networkx
+    def __get_nodes_to_draw(self) -> dict:
+        position = {}
+        for x in self._nodes:
+            position.setdefault(x.name, x.pos)
+        return position
+
+    def get_nodes_by_level(self, lvl) -> list:
+        arr = []
+        for x in self._nodes:
+            if x.level == lvl:
+                arr.append(x)
+        return arr
+
+    def get_node_by_name(self, n) -> HasseNode:
+        for x in self._nodes:
+            if x.name == n:
+                return x
 
     def draw(self):
-        print(self._bin_rel.second_elements(self._bin_rel.R))
-
-        pos = self.__set_position()   # задаем позиции вершин
+        self.__create_nodes()  # задаем позиции вершин
 
         G = nx.Graph()
         G.add_nodes_from(self._bin_rel.A)
-        print(self.__get_dominance_list())
         print("Словарь доминации (ключ - над кем, значения - кто): ", self._bin_rel.second_elements(
             self.__get_dominance_list()))
         print("Словарь доминации (ключ - кто, значения - над кем): ",
               self._bin_rel.second_elements(self.__get_dominance_list(), reverse=True))
         G.add_edges_from(self.__get_dominance_list())
-        print(self.__dominance_levels())
 
         # Удаляем ненужные кнопки на панели инструментов
         unwanted_buttons = ['pan', 'help', 'subplots']
@@ -100,5 +116,5 @@ class HasseDiagram():
                 "width": 2
             }
             # plt.title("Диаграмма Хассе")
-            nx.draw(G, pos, **options)
+            nx.draw(G, self.__get_nodes_to_draw(), **options)
             plt.show()
