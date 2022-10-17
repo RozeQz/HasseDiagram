@@ -202,71 +202,106 @@ class Ui_MainWindow(object):
         win.setMinimumSize(QtCore.QSize(300, 410))
         win.setMaximumSize(QtCore.QSize(300, 410))
 
-    def output(self):
-        binary = self.create_binary_relation()
+    def output(self, win):
+        try:
+            binary = self.create_binary_relation()
 
-        if binary.is_reflexive():
-            self.lbl_reflex.setText("   • Рефлексивно!")
-        elif binary.is_irreflexive():
-            self.lbl_reflex.setText("   • Иррефлексивно!")
-        else:
-            self.lbl_reflex.setText("   • Нерефлексивно!")
+            if binary.is_reflexive():
+                self.lbl_reflex.setText("   • Рефлексивно!")
+            elif binary.is_irreflexive():
+                self.lbl_reflex.setText("   • Иррефлексивно!")
+            else:
+                self.lbl_reflex.setText("   • Нерефлексивно!")
 
-        self.lbl_symm.setText(
-            "   • Симметрично!") if binary.is_symmetrical() else self.lbl_symm.setText(
-            "   • Несимметрично!")
-        self.lbl_trans.setText(
-            "   • Транзитивно!") if binary.is_transitive() else self.lbl_trans.setText(
-            "   • Нетранзитивно!")
-        self.lbl_antisym.setText(
-            "   • Антисимметрично!") if binary.is_antisymm() else self.lbl_antisym.setText(
-            "   • Не антисимметрично!")
+            self.lbl_symm.setText(
+                "   • Симметрично!") if binary.is_symmetrical() else self.lbl_symm.setText(
+                "   • Несимметрично!")
+            self.lbl_trans.setText(
+                "   • Транзитивно!") if binary.is_transitive() else self.lbl_trans.setText(
+                "   • Нетранзитивно!")
+            self.lbl_antisym.setText(
+                "   • Антисимметрично!") if binary.is_antisymm() else self.lbl_antisym.setText(
+                "   • Не антисимметрично!")
 
-        if binary.is_order():
-            hd = self.create_diagram(binary)
-            self.lbl_bin_class.setStyleSheet("color: #008000;\n"
-                                             "font-weight: bold;\n"
-                                             "font-size: 12;\n"
-                                             "font-family: Arial;")
+            if binary.is_order():
+                hd = self.create_diagram(binary)
+                self.lbl_bin_class.setStyleSheet("color: #008000;\n"
+                                                 "font-weight: bold;\n"
+                                                 "font-size: 12;\n"
+                                                 "font-family: Arial;")
 
-            # Удаляем ненужные кнопки на панели инструментов
-            unwanted_buttons = ['pan', 'help', 'subplots']
-            fig = plt.figure()
-            for button in unwanted_buttons:
-                fig.canvas.manager.toolmanager.remove_tool(button)
+                # Удаляем ненужные кнопки на панели инструментов
+                unwanted_buttons = ['pan', 'help', 'subplots']
+                fig = plt.figure()
+                for button in unwanted_buttons:
+                    fig.canvas.manager.toolmanager.remove_tool(button)
 
-            plt.show()
-            hd.draw()
+                plt.show()
+                hd.draw()
 
-        else:
-            self.lbl_bin_class.setStyleSheet("color: rgb(184, 0, 0);\n"
-                                             "font-weight: bold;\n"
-                                             "font-size: 12;\n"
-                                             "font-family: Arial;")
+            else:
+                self.lbl_bin_class.setStyleSheet("color: rgb(184, 0, 0);\n"
+                                                 "font-weight: bold;\n"
+                                                 "font-size: 12;\n"
+                                                 "font-family: Arial;")
 
-        bin_class = binary.class_of_relation()
-        if bin_class == "unknown": self.lbl_bin_class.setText("Не входит ни в один класс")
-        if bin_class == "tolerance": self.lbl_bin_class.setText("Эквивалентность")
-        if bin_class == "equivalence": self.lbl_bin_class.setText("Толерантность")
-        if bin_class == "partial order": self.lbl_bin_class.setText("Частичный порядок")
-        if bin_class == "preorder": self.lbl_bin_class.setText("Предпорядок")
-        if bin_class == "strict order": self.lbl_bin_class.setText("Строгий порядок")
-        if bin_class == "strict preorder": self.lbl_bin_class.setText("Строгий предпорядок")
+            bin_class = binary.class_of_relation()
+            if bin_class == "unknown": self.lbl_bin_class.setText("Не входит ни в один класс")
+            if bin_class == "tolerance": self.lbl_bin_class.setText("Эквивалентность")
+            if bin_class == "equivalence": self.lbl_bin_class.setText("Толерантность")
+            if bin_class == "partial order": self.lbl_bin_class.setText("Частичный порядок")
+            if bin_class == "preorder": self.lbl_bin_class.setText("Предпорядок")
+            if bin_class == "strict order": self.lbl_bin_class.setText("Строгий порядок")
+            if bin_class == "strict preorder": self.lbl_bin_class.setText("Строгий предпорядок")
+
+            self.resize_event(win)
+
+        except IOError as e:
+            self.error_handle(e)
 
     def button_click(self, win):
-        self.output()
-        self.resize_event(win)
+        self.output(win)
 
     def create_binary_relation(self) -> BinaryRelation:
         return BinaryRelation(self.input()[0], self.input()[1])
 
     def input(self) -> list:  # Ввод данных
         new_R = []
-        A = set(map(str, re.findall(r'\w+', self.edt_setA.toPlainText())))  # Ввод числового множества
-        R = re.findall(r'\([^)]*\)',
-                       self.edt_setR.toPlainText())  # Ввод бинарного отношения перечислением пар TODO: сделать валидацию R ⊆ A^2
+        A = set(map(str, re.split(r' *, *', ',' + self.edt_setA.toPlainText() + ',')))  # Ввод числового множества
+        A.discard('')
+        R = re.findall(r'(\([^)]*\)), *',
+                       self.edt_setR.toPlainText() + ", ")  # Ввод бинарного отношения перечислением пар TODO: сделать валидацию R ⊆ A^2
         for i in R:
-            R_str = tuple(map(str, re.findall(r'\w+\.?\w*', i)))  # Преобразуем в пару строковых значений
+            R_str = tuple(map(str, re.split(r' *, *', ',' + i[1:-1] + ',')))  # Преобразуем в пару строковых значений
+            R_str = tuple(x for x in R_str if x != '')
             new_R.append(R_str)
         R = new_R
-        return [A, R]
+
+        if len(A) == 0 or len(R) == 0:
+            raise IOError("Поля ввода не могут быть пустыми.")
+        else:
+            # Уникальные элементы в множестве пар, задающих бинарное отношение
+            list_unique = []
+            for i in R:
+                i = list(i)
+                list_unique.extend(i)
+            list_unique = list(set(list_unique))
+
+            if not set(list_unique).issubset(set(A)):
+                raise IOError("Бинарное отношение R не является подмножеством декартова произведения множества A на себя. Пожалуйста, задайте R ⊆ A^2.")
+
+            else:
+                for x in R:
+                    if len(x) != 2:
+                        raise IOError(
+                            "Неверное количество элементов в паре, задающей бинарное отношение.")
+                else:
+                    return [A, R]
+
+    def error_handle(self, err_type):
+        msg = QtWidgets.QMessageBox()
+        msg.setIcon(QtWidgets.QMessageBox.Icon.Critical)
+        msg.setText("Ошибка")
+        msg.setInformativeText(str(err_type))
+        msg.setWindowTitle("Ошибка")
+        msg.exec()
