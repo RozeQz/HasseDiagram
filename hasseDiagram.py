@@ -32,7 +32,7 @@ class HasseDiagram:
                 levels_dict.setdefault(1, []).append(k)  # уровень доминирования = 1, если элемент ни над кем не доминирует
                 dominance_dict.pop(k)  # удаляем рассмотренную вершину
 
-        while dominance_dict:
+        while dominance_dict:       # TODO: уменьшить вложенность
             for k, v in list(dominance_dict.items()):
                 for el in v:
                     for i in range(1, len(levels_dict) + 1):

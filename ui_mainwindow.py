@@ -7,7 +7,10 @@
 
 import re
 import matplotlib.pyplot as plt
-plt.rcParams['toolbar'] = 'toolmanager'
+import warnings
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    plt.rcParams['toolbar'] = 'toolmanager'
 from PyQt6 import QtCore, QtGui, QtWidgets
 from binaryRelation import BinaryRelation
 from hasseDiagram import HasseDiagram
@@ -192,7 +195,7 @@ class Ui_MainWindow(object):
         return HasseDiagram(bin_rel)
 
     def add_functions(self, win):
-        self.btn_run.clicked.connect(lambda: self.button_click(win))
+        self.btn_run.clicked.connect(lambda: self.button_click(win))        # TODO: btn_generate - генеировать рандомное бинарное отношение порядка
 
     def resize_event(self, win):
         win.resize(300, 410)
