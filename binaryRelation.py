@@ -3,8 +3,11 @@ import numpy as np
 # Класс Бинарного отношения
 class BinaryRelation:
     def __init__(self, a, r):
+        self.__R = []
+        for x in r:
+            if x not in self.__R:
+                self.__R.append(x)
         self.__A = a
-        self.__R = r
 
     @property
     def R(self) -> list:
@@ -12,6 +15,9 @@ class BinaryRelation:
 
     @R.setter
     def R(self, r):
+        for x in r:
+            if x not in self.__R:
+                self.__R.append(x)
         self.__R = r
 
     @property
