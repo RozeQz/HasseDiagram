@@ -46,7 +46,7 @@ class Ui_MainMenu(QtWidgets.QWidget):
 
         # Добавление функционала
         self.pushButton.clicked.connect(lambda: self.open_hasse(MainMenu))
-        self.pushButton_2.clicked.connect(self.open_theory)
+        self.pushButton_2.clicked.connect(lambda: self.open_theory(MainMenu))
 
     def retranslateUi(self, MainMenu):
         _translate = QtCore.QCoreApplication.translate
@@ -58,11 +58,11 @@ class Ui_MainMenu(QtWidgets.QWidget):
     def open_hasse(self, MainMenu):
         window = QtWidgets.QMainWindow()
         ui = Ui_MainWindow()
-        ui.setupUi(window)
+        ui.setupUi(window, MainMenu)
         window.show()
         MainMenu.close()
 
-    def open_theory(self):
+    def open_theory(self, MainMenu):
         global theory
         theory = QtWidgets.QDialog()
         ui = Ui_TheoryDialog()

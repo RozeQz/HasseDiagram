@@ -16,18 +16,18 @@ from binaryRelation import BinaryRelation
 from hasseDiagram import HasseDiagram
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+class Ui_MainWindow(QtWidgets.QWidget):
+    def setupUi(self, MainWindow, menu):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(300, 180)
+        MainWindow.resize(390, 175)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(300, 180))
-        MainWindow.setMaximumSize(QtCore.QSize(300, 180))
+        MainWindow.setMinimumSize(QtCore.QSize(390, 175))
+        MainWindow.setMaximumSize(QtCore.QSize(390, 200))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -151,51 +151,47 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.lbl_bin_class.setFont(font)
         self.lbl_bin_class.setStyleSheet("color: rgb(184, 0, 0);\n"
-                                         "font-weight: bold;\n"
-                                         "font-size: 12;\n"
-                                         "font-family: Arial;")
+"font-weight: bold")
         self.lbl_bin_class.setText("")
-        font.setPointSize(9)
         self.lbl_bin_class.setObjectName("lbl_bin_class")
+        self.btn_help = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_help.setGeometry(QtCore.QRect(300, 50, 75, 23))
+        self.btn_help.setObjectName("btn_help")
+        self.btn_back = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_back.setGeometry(QtCore.QRect(300, 20, 75, 23))
+        self.btn_back.setObjectName("btn_back")
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 300, 21))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         # Manual editing!
-        self.add_functions(MainWindow)  # Добавление сигналов
+        self.add_functions(MainWindow, menu)  # Добавление сигналов
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Диаграмма Хассе"))
-        self.edt_setR.setHtml(_translate("MainWindow",
-                                         "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                         "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-                                         "p, li { white-space: pre-wrap; }\n"
-                                         "</style></head><body style=\" font-family:\'Arial\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-                                         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
+        self.edt_setR.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Arial\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
         self.edt_setR.setPlaceholderText(_translate("MainWindow", "Введите бинарное отношение R:"))
         self.lbl_props.setText(_translate("MainWindow", "Свойства бинарного отношения:"))
-        self.edt_setA.setHtml(_translate("MainWindow",
-                                         "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                         "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-                                         "p, li { white-space: pre-wrap; }\n"
-                                         "</style></head><body style=\" font-family:\'Arial\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-                                         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
+        self.edt_setA.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Arial\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
         self.edt_setA.setPlaceholderText(_translate("MainWindow", "Введите множество А:"))
         self.btn_run.setText(_translate("MainWindow", "Выполнить"))
         self.lbl_class.setText(_translate("MainWindow", "Класс бинарного отношения:"))
+        self.btn_help.setText(_translate("MainWindow", "Справка"))
+        self.btn_back.setText(_translate("MainWindow", "Вернуться"))
 
-    def create_diagram(self, bin_rel) -> HasseDiagram:
-        print("Диаграмма хассе на множестве ", bin_rel.A)
-        return HasseDiagram(bin_rel)
-
-    def add_functions(self, win):
+    def add_functions(self, win, menu):
         self.btn_run.clicked.connect(lambda: self.button_click(win))        # TODO: btn_generate - генеировать рандомное бинарное отношение порядка
+        self.btn_back.clicked.connect(lambda: self.return_to_mainmenu(win, menu))
 
     def resize_event(self, win):
         win.resize(300, 410)
@@ -305,3 +301,7 @@ class Ui_MainWindow(object):
         msg.setInformativeText(str(err_type))
         msg.setWindowTitle("Ошибка")
         msg.exec()
+
+    def return_to_mainmenu(self, win, menu):
+        win.close()
+        menu.show()
