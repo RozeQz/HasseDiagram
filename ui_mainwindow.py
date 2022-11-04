@@ -208,6 +208,7 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.btn_run.clicked.connect(
             lambda: self.button_click(win))  # TODO: btn_generate - генеировать рандомное бинарное отношение порядка
         self.btn_back.clicked.connect(lambda: self.return_to_mainmenu(win, menu))
+        self.btn_help.clicked.connect(self.open_help)
 
     def resize_event(self, win):
         win.resize(390, 410)
@@ -323,3 +324,13 @@ class Ui_MainWindow(QtWidgets.QWidget):
     def return_to_mainmenu(self, win, menu):
         win.close()
         menu.show()
+
+    def open_help(self):
+        msg = QtWidgets.QMessageBox()
+        msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+        msg.setText("Справка по вводу данных")
+        msg.setInformativeText("Поле ввода множества A должно заполняться элементами множества через запятую. Например: 1, 2, 3.\n"
+                               "Поле ввода бинарного отношения R должно заполняться парами элементов, записанных в круглых скобках, через запятую. "
+                               "Сами пары должны быть разделены запятыми. Например: (1,2), (1,3), (2,3).")
+        msg.setWindowTitle("Справка по вводу данных")
+        msg.exec()
