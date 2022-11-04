@@ -7,8 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>347</width>
-    <height>300</height>
+    <height>383</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Теория</string>
@@ -16,27 +21,59 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>40</y>
-     <width>231</width>
-     <height>16</height>
+     <x>130</x>
+     <y>10</y>
+     <width>71</width>
+     <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="text">
-    <string>Просто справочная теория</string>
+    <string>Теория</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="btn_back">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>110</y>
+     <x>10</x>
+     <y>10</y>
      <width>75</width>
      <height>23</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
    <property name="text">
     <string>Вернуться</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>50</y>
+     <width>311</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Бинарное отношение&lt;/span&gt; – отношение между множествами A и B, то есть всякое подмножество декартова произведения этих множеств.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Отношение порядка&lt;/span&gt; – бинарное отношение между элементами данного множества, по своим свойствам сходное со свойствами отношения неравенства.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Упорядоченное множество&lt;/span&gt; – множество вместе с заданным на нем отношением порядка. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Диаграмма Хассе&lt;/span&gt; – это графическое представление отношения элементов упорядоченного множества. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>

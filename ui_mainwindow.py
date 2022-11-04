@@ -28,6 +28,9 @@ class Ui_MainWindow(QtWidgets.QWidget):
         MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setMinimumSize(QtCore.QSize(390, 175))
         MainWindow.setMaximumSize(QtCore.QSize(390, 200))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        MainWindow.setFont(font)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -67,7 +70,7 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.edt_setR.setGeometry(QtCore.QRect(20, 60, 260, 60))
         font = QtGui.QFont()
         font.setFamily("Arial")
-        font.setPointSize(9)
+        font.setPointSize(10)
         font.setBold(False)
         font.setWeight(50)
         self.edt_setR.setFont(font)
@@ -89,7 +92,7 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.edt_setA.setGeometry(QtCore.QRect(20, 20, 260, 30))
         font = QtGui.QFont()
         font.setFamily("Arial")
-        font.setPointSize(9)
+        font.setPointSize(10)
         font.setBold(False)
         font.setWeight(50)
         self.edt_setA.setFont(font)
@@ -112,7 +115,7 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.btn_run.setGeometry(QtCore.QRect(110, 140, 81, 23))
         font = QtGui.QFont()
         font.setFamily("Arial")
-        font.setPointSize(9)
+        font.setPointSize(10)
         font.setBold(False)
         font.setWeight(50)
         self.btn_run.setFont(font)
@@ -156,9 +159,17 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.lbl_bin_class.setObjectName("lbl_bin_class")
         self.btn_help = QtWidgets.QPushButton(self.centralwidget)
         self.btn_help.setGeometry(QtCore.QRect(300, 50, 75, 23))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.btn_help.setFont(font)
         self.btn_help.setObjectName("btn_help")
         self.btn_back = QtWidgets.QPushButton(self.centralwidget)
         self.btn_back.setGeometry(QtCore.QRect(300, 20, 75, 23))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.btn_back.setFont(font)
         self.btn_back.setObjectName("btn_back")
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -174,14 +185,14 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.edt_setR.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Arial\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'Arial\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
         self.edt_setR.setPlaceholderText(_translate("MainWindow", "Введите бинарное отношение R:"))
         self.lbl_props.setText(_translate("MainWindow", "Свойства бинарного отношения:"))
         self.edt_setA.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Arial\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'Arial\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
         self.edt_setA.setPlaceholderText(_translate("MainWindow", "Введите множество А:"))
         self.btn_run.setText(_translate("MainWindow", "Выполнить"))
@@ -189,14 +200,19 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.btn_help.setText(_translate("MainWindow", "Справка"))
         self.btn_back.setText(_translate("MainWindow", "Вернуться"))
 
+    def create_diagram(self, bin_rel) -> HasseDiagram:
+        print("Диаграмма хассе на множестве ", bin_rel.A)
+        return HasseDiagram(bin_rel)
+
     def add_functions(self, win, menu):
-        self.btn_run.clicked.connect(lambda: self.button_click(win))        # TODO: btn_generate - генеировать рандомное бинарное отношение порядка
+        self.btn_run.clicked.connect(
+            lambda: self.button_click(win))  # TODO: btn_generate - генеировать рандомное бинарное отношение порядка
         self.btn_back.clicked.connect(lambda: self.return_to_mainmenu(win, menu))
 
     def resize_event(self, win):
-        win.resize(300, 410)
-        win.setMinimumSize(QtCore.QSize(300, 410))
-        win.setMaximumSize(QtCore.QSize(300, 410))
+        win.resize(390, 410)
+        win.setMinimumSize(QtCore.QSize(390, 410))
+        win.setMaximumSize(QtCore.QSize(390, 410))
 
     def output(self, win):
         try:
@@ -268,7 +284,8 @@ class Ui_MainWindow(QtWidgets.QWidget):
         R = re.findall(r'(\([^)]*\)), *',
                        self.edt_setR.toPlainText() + ", ")  # Ввод бинарного отношения перечислением пар TODO: сделать валидацию R ⊆ A^2
         for i in R:
-            R_str = tuple(map(str, re.split(r' *, *', ',' + i[1:-1] + ',')))  # Преобразуем в пару строковых значений
+            R_str = tuple(
+                map(str, re.split(r' *, *', ',' + i[1:-1] + ',')))  # Преобразуем в пару строковых значений
             R_str = tuple(x for x in R_str if x != '')
             new_R.append(R_str)
         R = new_R
@@ -284,7 +301,8 @@ class Ui_MainWindow(QtWidgets.QWidget):
             list_unique = list(set(list_unique))
 
             if not set(list_unique).issubset(set(A)):
-                raise IOError("Бинарное отношение R не является подмножеством декартова произведения множества A на себя. Пожалуйста, задайте R ⊆ A^2.")
+                raise IOError(
+                    "Бинарное отношение R не является подмножеством декартова произведения множества A на себя. Пожалуйста, задайте R ⊆ A^2.")
 
             else:
                 for x in R:

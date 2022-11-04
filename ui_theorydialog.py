@@ -9,24 +9,46 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_TheoryDialog(QtWidgets.QWidget):
+class Ui_TheoryDialog(object):
     def setupUi(self, TheoryDialog):
         TheoryDialog.setObjectName("TheoryDialog")
-        TheoryDialog.resize(347, 300)
+        TheoryDialog.resize(347, 383)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        TheoryDialog.setFont(font)
         self.label = QtWidgets.QLabel(TheoryDialog)
-        self.label.setGeometry(QtCore.QRect(30, 40, 231, 16))
+        self.label.setGeometry(QtCore.QRect(140, 10, 71, 31))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label.setFont(font)
         self.label.setObjectName("label")
-        self.pushButton = QtWidgets.QPushButton(TheoryDialog)
-        self.pushButton.setGeometry(QtCore.QRect(30, 110, 75, 23))
-        self.pushButton.setObjectName("pushButton")
+        self.label.setWordWrap(True)
+        self.btn_back = QtWidgets.QPushButton(TheoryDialog)
+        self.btn_back.setGeometry(QtCore.QRect(10, 10, 75, 23))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.btn_back.setFont(font)
+        self.btn_back.setObjectName("btn_back")
+        self.label_2 = QtWidgets.QLabel(TheoryDialog)
+        self.label_2.setGeometry(QtCore.QRect(20, 50, 310, 300))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setKerning(True)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
+        self.label_2.setWordWrap(True)
 
         self.retranslateUi(TheoryDialog)
         QtCore.QMetaObject.connectSlotsByName(TheoryDialog)
 
-        self.pushButton.clicked.connect(TheoryDialog.close)
+        self.btn_back.clicked.connect(TheoryDialog.close)
 
     def retranslateUi(self, TheoryDialog):
         _translate = QtCore.QCoreApplication.translate
         TheoryDialog.setWindowTitle(_translate("TheoryDialog", "Теория"))
-        self.label.setText(_translate("TheoryDialog", "Просто справочная теория"))
-        self.pushButton.setText(_translate("TheoryDialog", "Вернуться"))
+        self.label.setText(_translate("TheoryDialog", "Теория"))
+        self.btn_back.setText(_translate("TheoryDialog", "Вернуться"))
+        self.label_2.setText(_translate("TheoryDialog", "<html><head/><body><p><span style=\" font-weight:600;\">Бинарное отношение</span> – отношение между множествами A и B, то есть всякое подмножество декартова произведения этих множеств.</p><p><span style=\" font-weight:600;\">Отношение порядка</span> – бинарное отношение между элементами данного множества, по своим свойствам сходное со свойствами отношения неравенства.</p><p><span style=\" font-weight:600;\">Упорядоченное множество</span> – множество вместе с заданным на нем отношением порядка. </p><p><span style=\" font-weight:600;\">Диаграмма Хассе</span> – это графическое представление отношения элементов упорядоченного множества. </p></body></html>"))
