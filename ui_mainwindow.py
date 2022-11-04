@@ -253,6 +253,12 @@ class Ui_MainWindow(QtWidgets.QWidget):
                 hd.draw()
 
             else:
+                msg = QtWidgets.QMessageBox()
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                msg.setText("Не является отношением порядка!")
+                msg.setWindowTitle("Не является отношением порядка!")
+                msg.exec()
+
                 self.lbl_bin_class.setStyleSheet("color: rgb(184, 0, 0);\n"
                                                  "font-weight: bold;\n"
                                                  "font-size: 12;\n"
