@@ -28,12 +28,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         event.accept()
 
     def add_functions(self, parent):
-        self.btn_run.clicked.connect(self.button_click)  # TODO: btn_generate - генеировать рандомное бинарное отношение порядка
+        self.btn_run.clicked.connect(self.button_click)  # TODO: генеировать рандомное бинарное отношение порядка
         self.btn_back.clicked.connect(lambda: self.return_to_mainmenu(parent))
         self.btn_help.clicked.connect(self.open_help)
 
     @staticmethod
-    def create_diagram(self, bin_rel) -> HasseDiagram:
+    def create_diagram(bin_rel) -> HasseDiagram:
         print("Диаграмма хассе на множестве ", bin_rel.A)
         return HasseDiagram(bin_rel)
 
@@ -92,13 +92,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                                  "font-family: Arial;")
 
             bin_class = binary.class_of_relation()
-            if bin_class == "unknown": self.lbl_bin_class.setText("Не входит ни в один класс")
-            if bin_class == "tolerance": self.lbl_bin_class.setText("Эквивалентность")
-            if bin_class == "equivalence": self.lbl_bin_class.setText("Толерантность")
-            if bin_class == "partial order": self.lbl_bin_class.setText("Частичный порядок")
-            if bin_class == "preorder": self.lbl_bin_class.setText("Предпорядок")
-            if bin_class == "strict order": self.lbl_bin_class.setText("Строгий порядок")
-            if bin_class == "strict preorder": self.lbl_bin_class.setText("Строгий предпорядок")
+            if bin_class == "unknown":
+                self.lbl_bin_class.setText("Не входит ни в один класс")
+            if bin_class == "tolerance":
+                self.lbl_bin_class.setText("Эквивалентность")
+            if bin_class == "equivalence":
+                self.lbl_bin_class.setText("Толерантность")
+            if bin_class == "partial order":
+                self.lbl_bin_class.setText("Частичный порядок")
+            if bin_class == "preorder":
+                self.lbl_bin_class.setText("Предпорядок")
+            if bin_class == "strict order":
+                self.lbl_bin_class.setText("Строгий порядок")
+            if bin_class == "strict preorder":
+                self.lbl_bin_class.setText("Строгий предпорядок")
 
             self.resize_event()
 
@@ -116,7 +123,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         A = set(map(str, re.split(r' *, *', ',' + self.edt_setA.toPlainText() + ',')))  # Ввод числового множества
         A.discard('')
         R = re.findall(r'(\([^)]*\)), *',
-                       self.edt_setR.toPlainText() + ", ")  # Ввод бинарного отношения перечислением пар TODO: сделать валидацию R ⊆ A^2
+                       self.edt_setR.toPlainText() + ", ")  # Ввод бинарного отношения перечислением пар
         for i in R:
             R_str = tuple(
                 map(str, re.split(r' *, *', ',' + i[1:-1] + ',')))  # Преобразуем в пару строковых значений
@@ -136,7 +143,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             if not set(list_unique).issubset(set(A)):
                 raise IOError(
-                    "Бинарное отношение R не является подмножеством декартова произведения множества A на себя. Пожалуйста, задайте R ⊆ A^2.")
+                    "Бинарное отношение R не является подмножеством декартова "
+                    "произведения множества A на себя. Пожалуйста, задайте R ⊆ A^2.")
 
             else:
                 for x in R:
@@ -147,7 +155,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     return [A, R]
 
     @staticmethod
-    def error_handle(self, err_type):
+    def error_handle(err_type):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Critical)
         msg.setText("Ошибка")
@@ -160,13 +168,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         menu.setVisible(True)
 
     @staticmethod
-    def open_help(self):
+    def open_help():
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Information)
         msg.setText("Справка по вводу данных")
         msg.setInformativeText(
             "Поле ввода множества A должно заполняться элементами множества через запятую. Например: 1, 2, 3.\n"
-            "Поле ввода бинарного отношения R должно заполняться парами элементов, записанных в круглых скобках, через запятую. "
+            "Поле ввода бинарного отношения R должно заполняться парами элементов, "
+            "записанных в круглых скобках, через запятую. "
             "Сами пары должны быть разделены запятыми. Например: (1,2), (1,3), (2,3).")
         msg.setWindowTitle("Справка по вводу данных")
         msg.exec()
