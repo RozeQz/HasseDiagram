@@ -4,6 +4,7 @@ from hasseNode import HasseNode
 DIAGRAM_HEIGHT = 50
 DIAGRAM_WIDTH = 50
 
+
 # Класс Диаграммы Хассе
 class HasseDiagram:
     # Используется агрегация (HasseDiagram не может существовать без BinaryRelation)

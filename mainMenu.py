@@ -4,6 +4,7 @@ from ui_theorydialog import Ui_TheoryDialog
 from mainWindow import MainWindow
 from PyQt6.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox
 
+
 class MainMenu(QMainWindow, Ui_MainMenu):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -42,6 +43,7 @@ class MainMenu(QMainWindow, Ui_MainMenu):
     def open_mainmenu(self):
         self.setVisible(True)
 
+    @staticmethod
     def open_theory(self):
         global theory
         theory = QDialog()

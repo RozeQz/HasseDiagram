@@ -10,6 +10,7 @@ from binaryRelation import BinaryRelation
 from hasseDiagram import HasseDiagram
 from ui_mainwindow import Ui_MainWindow
 
+
 # Закрытие окна создания диаграммы Хассе
 class MainWindow(QMainWindow, Ui_MainWindow):
     window_closed = QtCore.pyqtSignal()
@@ -31,6 +32,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.btn_back.clicked.connect(lambda: self.return_to_mainmenu(parent))
         self.btn_help.clicked.connect(self.open_help)
 
+    @staticmethod
     def create_diagram(self, bin_rel) -> HasseDiagram:
         print("Диаграмма хассе на множестве ", bin_rel.A)
         return HasseDiagram(bin_rel)
@@ -144,6 +146,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 else:
                     return [A, R]
 
+    @staticmethod
     def error_handle(self, err_type):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Critical)
@@ -156,6 +159,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.close()
         menu.setVisible(True)
 
+    @staticmethod
     def open_help(self):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Information)

@@ -1,5 +1,6 @@
 import numpy as np
 
+
 # Класс Бинарного отношения
 class BinaryRelation:
     def __init__(self, a, r):
