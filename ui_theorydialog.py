@@ -23,6 +23,7 @@ class Ui_TheoryDialog(object):
         font = QtGui.QFont()
         font.setFamily("Arial")
         TheoryDialog.setFont(font)
+        TheoryDialog.setStyleSheet("background-color: #FEFFFE;")
         self.gridLayout_2 = QtWidgets.QGridLayout(TheoryDialog)
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_2.setSpacing(0)

@@ -28,7 +28,7 @@
   <property name="maximumSize">
    <size>
     <width>390</width>
-    <height>200</height>
+    <height>175</height>
    </size>
   </property>
   <property name="font">
@@ -38,6 +38,9 @@
   </property>
   <property name="windowTitle">
    <string>Диаграмма Хассе</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #FEFFFE;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
@@ -113,6 +116,11 @@
       <bold>false</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: #3C66DC;
+border-width: 1px;
+border-style: solid;</string>
+    </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -166,6 +174,11 @@ p, li { white-space: pre-wrap; }
       <bold>false</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: #3C66DC;
+border-width: 1px;
+border-style: solid;</string>
+    </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -205,19 +218,29 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="btn_run">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>140</y>
-      <width>81</width>
-      <height>23</height>
+      <x>90</x>
+      <y>130</y>
+      <width>111</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Arial</family>
-      <pointsize>10</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: #3C66DC;
+font: 90 12pt &quot;Arial&quot;;
+font-weight: bold;
+color: #3C66DC;
+border-width: 2px;
+border-style: solid;
+background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Выполнить</string>
@@ -309,7 +332,18 @@ font-weight: bold</string>
      <font>
       <family>Arial</family>
       <pointsize>10</pointsize>
+      <weight>11</weight>
+      <italic>false</italic>
+      <bold>false</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: black;
+font: 90 10pt &quot;Arial&quot;;
+color: #black;
+border-width: 1px;
+border-style: solid;
+background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Справка</string>
@@ -328,7 +362,18 @@ font-weight: bold</string>
      <font>
       <family>Arial</family>
       <pointsize>10</pointsize>
+      <weight>11</weight>
+      <italic>false</italic>
+      <bold>false</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: black;
+font: 90 10pt &quot;Arial&quot;;
+color: #black;
+border-width: 1px;
+border-style: solid;
+background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Вернуться</string>

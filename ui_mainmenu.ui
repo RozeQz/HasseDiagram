@@ -51,14 +51,15 @@
      <font>
       <family>Arial</family>
       <pointsize>12</pointsize>
-      <weight>11</weight>
+      <weight>75</weight>
       <italic>false</italic>
-      <bold>false</bold>
+      <bold>true</bold>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">border-color: #3C66DC;
 font: 90 12pt &quot;Arial&quot;;
+font-weight: bold;
 color: #3C66DC;
 border-width: 2px;
 border-style: solid;
@@ -82,14 +83,15 @@ background-color: rgb(255, 255, 255);
      <font>
       <family>Arial</family>
       <pointsize>12</pointsize>
-      <weight>11</weight>
+      <weight>75</weight>
       <italic>false</italic>
-      <bold>false</bold>
+      <bold>true</bold>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">border-color: #3C66DC;
 font: 90 12pt &quot;Arial&quot;;
+font-weight: bold;
 color: #3C66DC;
 border-width: 2px;
 border-style: solid;
@@ -126,7 +128,8 @@ background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">white-space: normal;
-color: #3C66DC;</string>
+color: #3C66DC;
+font-weight: bold;</string>
     </property>
     <property name="text">
      <string>Обучающая программа визуализации упорядоченных множеств</string>

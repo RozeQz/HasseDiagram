@@ -34,10 +34,8 @@ class MainMenu(QMainWindow, Ui_MainMenu):
             event.ignore()
 
     def open_hasse(self):
-        window = MainWindow()
+        window = MainWindow(self)
         window.window_closed.connect(self.open_mainmenu)
-        ui = Ui_MainWindow()
-        ui.setupUi(window, self)
         window.show()
         self.setVisible(False)
 

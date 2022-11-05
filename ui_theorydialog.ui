@@ -36,6 +36,9 @@
   <property name="windowTitle">
    <string>Теория</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #FEFFFE;</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <property name="leftMargin">
     <number>0</number>
