@@ -7,21 +7,42 @@
     <x>0</x>
     <y>0</y>
     <width>260</width>
-    <height>259</height>
+    <height>315</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>260</width>
+    <height>315</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>260</width>
+    <height>315</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Обучающая программа - Главное меню</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">text-align: center;</string>
+   <string notr="true">background-color: #FEFFFE;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <widget class="QPushButton" name="btn_create">
     <property name="geometry">
      <rect>
       <x>45</x>
-      <y>190</y>
+      <y>260</y>
       <width>170</width>
       <height>31</height>
      </rect>
@@ -30,7 +51,19 @@
      <font>
       <family>Arial</family>
       <pointsize>12</pointsize>
+      <weight>11</weight>
+      <italic>false</italic>
+      <bold>false</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: #3C66DC;
+font: 90 12pt &quot;Arial&quot;;
+color: #3C66DC;
+border-width: 2px;
+border-style: solid;
+background-color: rgb(255, 255, 255);
+</string>
     </property>
     <property name="text">
      <string>Создать диаграмму</string>
@@ -40,7 +73,7 @@
     <property name="geometry">
      <rect>
       <x>45</x>
-      <y>150</y>
+      <y>220</y>
       <width>170</width>
       <height>31</height>
      </rect>
@@ -49,7 +82,18 @@
      <font>
       <family>Arial</family>
       <pointsize>12</pointsize>
+      <weight>11</weight>
+      <italic>false</italic>
+      <bold>false</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: #3C66DC;
+font: 90 12pt &quot;Arial&quot;;
+color: #3C66DC;
+border-width: 2px;
+border-style: solid;
+background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Теория</string>
@@ -61,19 +105,19 @@
       <x>30</x>
       <y>20</y>
       <width>200</width>
-      <height>61</height>
+      <height>80</height>
      </rect>
     </property>
     <property name="maximumSize">
      <size>
-      <width>200</width>
+      <width>300</width>
       <height>100</height>
      </size>
     </property>
     <property name="font">
      <font>
       <family>Arial</family>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
       <weight>75</weight>
       <bold>true</bold>
       <strikeout>false</strikeout>
@@ -81,18 +125,42 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">white-space: normal;</string>
+     <string notr="true">white-space: normal;
+color: #3C66DC;</string>
     </property>
     <property name="text">
      <string>Обучающая программа визуализации упорядоченных множеств</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::LinksAccessibleByMouse</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="icon">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>120</y>
+      <width>101</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>assets/icon.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
    </widget>
   </widget>
-  <action name="action_3">
-   <property name="text">
-    <string>хуй</string>
-   </property>
-  </action>
  </widget>
  <resources/>
  <connections/>

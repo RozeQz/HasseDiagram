@@ -7,54 +7,83 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-from ui_mainwindow import Ui_MainWindow
-from ui_theorydialog import Ui_TheoryDialog
-from mainWindow import MainWindow
 
-class Ui_MainMenu(QtWidgets.QWidget):
+
+class Ui_MainMenu(object):
     def setupUi(self, MainMenu):
         MainMenu.setObjectName("MainMenu")
-        MainMenu.resize(260, 259)
-        MainMenu.setStyleSheet("text-align: center;")
+        MainMenu.resize(260, 315)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(MainMenu.sizePolicy().hasHeightForWidth())
+        MainMenu.setSizePolicy(sizePolicy)
+        MainMenu.setMinimumSize(QtCore.QSize(260, 315))
+        MainMenu.setMaximumSize(QtCore.QSize(260, 315))
+        MainMenu.setStyleSheet("background-color: #FEFFFE;")
         self.centralwidget = QtWidgets.QWidget(MainMenu)
+        self.centralwidget.setStyleSheet("")
         self.centralwidget.setObjectName("centralwidget")
         self.btn_create = QtWidgets.QPushButton(self.centralwidget)
-        self.btn_create.setGeometry(QtCore.QRect(45, 190, 170, 31))
+        self.btn_create.setGeometry(QtCore.QRect(45, 260, 170, 31))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(11)
         self.btn_create.setFont(font)
+        self.btn_create.setStyleSheet("border-color: #3C66DC;\n"
+"font: 90 12pt \"Arial\";\n"
+"color: #3C66DC;\n"
+"border-width: 2px;\n"
+"border-style: solid;\n"
+"background-color: rgb(255, 255, 255);\n"
+"")
         self.btn_create.setObjectName("btn_create")
         self.btn_theory = QtWidgets.QPushButton(self.centralwidget)
-        self.btn_theory.setGeometry(QtCore.QRect(45, 150, 170, 31))
+        self.btn_theory.setGeometry(QtCore.QRect(45, 220, 170, 31))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(11)
         self.btn_theory.setFont(font)
+        self.btn_theory.setStyleSheet("border-color: #3C66DC;\n"
+"font: 90 12pt \"Arial\";\n"
+"color: #3C66DC;\n"
+"border-width: 2px;\n"
+"border-style: solid;\n"
+"background-color: rgb(255, 255, 255);")
         self.btn_theory.setObjectName("btn_theory")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(20, 20, 220, 80))
+        self.label.setGeometry(QtCore.QRect(30, 20, 200, 80))
         self.label.setMaximumSize(QtCore.QSize(300, 100))
-        self.label.setWordWrap(True)
-        self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         font = QtGui.QFont()
         font.setFamily("Arial")
-        font.setPointSize(14)
+        font.setPointSize(12)
         font.setBold(True)
         font.setWeight(75)
         font.setStrikeOut(False)
         font.setStyleStrategy(QtGui.QFont.StyleStrategy.PreferDefault)
         self.label.setFont(font)
-        self.label.setStyleSheet("white-space: normal;")
+        self.label.setStyleSheet("white-space: normal;\n"
+"color: #3C66DC;")
+        self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label.setWordWrap(True)
+        self.label.setTextInteractionFlags(QtCore.Qt.TextInteractionFlag.LinksAccessibleByMouse)
         self.label.setObjectName("label")
+        self.icon = QtWidgets.QLabel(self.centralwidget)
+        self.icon.setGeometry(QtCore.QRect(80, 120, 101, 81))
+        self.icon.setText("")
+        self.icon.setPixmap(QtGui.QPixmap("assets/icon.png"))
+        self.icon.setScaledContents(True)
+        self.icon.setObjectName("icon")
         MainMenu.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainMenu)
         QtCore.QMetaObject.connectSlotsByName(MainMenu)
-
-        # Добавление функционала
-        self.btn_create.clicked.connect(lambda: self.open_hasse(MainMenu))
-        self.btn_theory.clicked.connect(self.open_theory)
 
     def retranslateUi(self, MainMenu):
         _translate = QtCore.QCoreApplication.translate
@@ -62,21 +91,3 @@ class Ui_MainMenu(QtWidgets.QWidget):
         self.btn_create.setText(_translate("MainMenu", "Создать диаграмму"))
         self.btn_theory.setText(_translate("MainMenu", "Теория"))
         self.label.setText(_translate("MainMenu", "Обучающая программа визуализации упорядоченных множеств"))
-
-    def open_hasse(self, MainMenu):
-        window = MainWindow()
-        window.window_closed.connect(lambda: self.open_mainmenu(MainMenu))
-        ui = Ui_MainWindow()
-        ui.setupUi(window, MainMenu)
-        window.show()
-        MainMenu.setVisible(False)
-
-    def open_mainmenu(self, MainMenu):
-        MainMenu.setVisible(True)
-
-    def open_theory(self):
-        global theory
-        theory = QtWidgets.QDialog()
-        ui = Ui_TheoryDialog()
-        ui.setupUi(theory)
-        theory.show()
