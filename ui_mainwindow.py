@@ -329,7 +329,7 @@ class Ui_MainWindow(QtWidgets.QWidget):
 
     def return_to_mainmenu(self, win, menu):
         win.close()
-        menu.show()
+        menu.setVisible(True)
 
     def open_help(self):
         msg = QtWidgets.QMessageBox()

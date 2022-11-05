@@ -9,7 +9,7 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from ui_mainwindow import Ui_MainWindow
 from ui_theorydialog import Ui_TheoryDialog
-
+from mainWindow import MainWindow
 
 class Ui_MainMenu(QtWidgets.QWidget):
     def setupUi(self, MainMenu):
@@ -54,7 +54,7 @@ class Ui_MainMenu(QtWidgets.QWidget):
 
         # Добавление функционала
         self.btn_create.clicked.connect(lambda: self.open_hasse(MainMenu))
-        self.btn_theory.clicked.connect(lambda: self.open_theory(MainMenu))
+        self.btn_theory.clicked.connect(self.open_theory)
 
     def retranslateUi(self, MainMenu):
         _translate = QtCore.QCoreApplication.translate
@@ -64,13 +64,17 @@ class Ui_MainMenu(QtWidgets.QWidget):
         self.label.setText(_translate("MainMenu", "Обучающая программа визуализации упорядоченных множеств"))
 
     def open_hasse(self, MainMenu):
-        window = QtWidgets.QMainWindow()
+        window = MainWindow()
+        window.window_closed.connect(lambda: self.open_mainmenu(MainMenu))
         ui = Ui_MainWindow()
         ui.setupUi(window, MainMenu)
         window.show()
-        MainMenu.close()
+        MainMenu.setVisible(False)
 
-    def open_theory(self, MainMenu):
+    def open_mainmenu(self, MainMenu):
+        MainMenu.setVisible(True)
+
+    def open_theory(self):
         global theory
         theory = QtWidgets.QDialog()
         ui = Ui_TheoryDialog()
