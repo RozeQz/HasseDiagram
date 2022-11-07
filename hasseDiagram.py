@@ -13,8 +13,16 @@ class HasseDiagram:
 
     # Массив доминирования (соединения на диаграмме Хассе)
     def __get_dominance_list(self) -> list:
-        edge_list = [(x, y) for x, y in self.__bin_rel.R if x != y]
+        edge_list = self.__bin_rel.R
         new_edge_list = edge_list.copy()
+
+        for (x, y) in edge_list:
+            if (y, x) in edge_list:
+                new_edge_list.remove((x, y))
+
+        edge_list = new_edge_list.copy()
+        new_edge_list = edge_list.copy()
+
         for (x, y) in edge_list:
             for z in list(self.__bin_rel.A):
                 if ((x, z) in edge_list) and ((z, y) in edge_list):
