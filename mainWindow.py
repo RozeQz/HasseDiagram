@@ -94,9 +94,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if bin_class == "unknown":
                 self.lbl_bin_class.setText("Не входит ни в один класс")
             if bin_class == "tolerance":
-                self.lbl_bin_class.setText("Эквивалентность")
-            if bin_class == "equivalence":
                 self.lbl_bin_class.setText("Толерантность")
+            if bin_class == "equivalence":
+                self.lbl_bin_class.setText("Эквивалентность")
             if bin_class == "partial order":
                 self.lbl_bin_class.setText("Частичный порядок")
             if bin_class == "preorder":
@@ -118,17 +118,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         return BinaryRelation(self.input()[0], self.input()[1])
 
     def input(self) -> list:  # Ввод данных
-        new_R = []
         A = list(map(str, re.split(r' *, *', ',' + self.edt_setA.toPlainText() + ',')))  # Ввод числового множества
         A = list(x for x in A if x != '')
-        R = re.findall(r'(\([^)]*\)), *',
-                       self.edt_setR.toPlainText() + ", ")  # Ввод бинарного отношения перечислением пар
-        for i in R:
-            R_str = tuple(
-                map(str, re.split(r' *, *', ',' + i[1:-1] + ',')))  # Преобразуем в пару строковых значений
-            R_str = tuple(x for x in R_str if x != '')
-            new_R.append(R_str)
-        R = new_R
+        R = []
+        R_raw = re.findall(r'\( *(\w+ *, *\w+) *\) *, *',
+                           self.edt_setR.toPlainText() + ",")  # Ввод бинарного отношения перечислением пар
+        for i in R_raw:
+            R_str = tuple(map(str, re.split(r' *, *', i)))  # Преобразуем в пару строковых значений
+            R.append(R_str)
 
         if len(A) == 0 or len(R) == 0:
             raise IOError("Поля ввода не могут быть пустыми.")
