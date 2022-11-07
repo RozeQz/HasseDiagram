@@ -69,8 +69,8 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         self.edt_setR.setFont(font)
         self.edt_setR.setStyleSheet("border-color: #3C66DC;\n"
-"border-width: 1px;\n"
-"border-style: solid;")
+                                    "border-width: 1px;\n"
+                                    "border-style: solid;")
         self.edt_setR.setObjectName("edt_setR")
         self.lbl_props = QtWidgets.QLabel(self.centralwidget)
         self.lbl_props.setGeometry(QtCore.QRect(20, 180, 260, 16))
@@ -94,8 +94,8 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         self.edt_setA.setFont(font)
         self.edt_setA.setStyleSheet("border-color: #3C66DC;\n"
-"border-width: 1px;\n"
-"border-style: solid;")
+                                    "border-width: 1px;\n"
+                                    "border-style: solid;")
         self.edt_setA.setObjectName("edt_setA")
         self.lbl_antisym = QtWidgets.QLabel(self.centralwidget)
         self.lbl_antisym.setGeometry(QtCore.QRect(20, 270, 260, 16))
@@ -121,12 +121,12 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.btn_run.setFont(font)
         self.btn_run.setStyleSheet("border-color: #3C66DC;\n"
-"font: 90 12pt \"Arial\";\n"
-"font-weight: bold;\n"
-"color: #3C66DC;\n"
-"border-width: 2px;\n"
-"border-style: solid;\n"
-"background-color: rgb(255, 255, 255);")
+                                   "font: 90 12pt \"Arial\";\n"
+                                   "font-weight: bold;\n"
+                                   "color: #3C66DC;\n"
+                                   "border-width: 2px;\n"
+                                   "border-style: solid;\n"
+                                   "background-color: rgb(255, 255, 255);")
         self.btn_run.setObjectName("btn_run")
         self.lbl_trans = QtWidgets.QLabel(self.centralwidget)
         self.lbl_trans.setGeometry(QtCore.QRect(20, 300, 260, 16))
@@ -162,7 +162,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.lbl_bin_class.setFont(font)
         self.lbl_bin_class.setStyleSheet("color: rgb(184, 0, 0);\n"
-"font-weight: bold")
+                                         "font-weight: bold")
         self.lbl_bin_class.setText("")
         self.lbl_bin_class.setObjectName("lbl_bin_class")
         self.btn_help = QtWidgets.QPushButton(self.centralwidget)
@@ -175,11 +175,11 @@ class Ui_MainWindow(object):
         font.setWeight(11)
         self.btn_help.setFont(font)
         self.btn_help.setStyleSheet("border-color: black;\n"
-"font: 90 10pt \"Arial\";\n"
-"color: #black;\n"
-"border-width: 1px;\n"
-"border-style: solid;\n"
-"background-color: rgb(255, 255, 255);")
+                                    "font: 90 10pt \"Arial\";\n"
+                                    "color: #black;\n"
+                                    "border-width: 1px;\n"
+                                    "border-style: solid;\n"
+                                    "background-color: rgb(255, 255, 255);")
         self.btn_help.setObjectName("btn_help")
         self.btn_back = QtWidgets.QPushButton(self.centralwidget)
         self.btn_back.setGeometry(QtCore.QRect(300, 20, 75, 23))
@@ -191,11 +191,11 @@ class Ui_MainWindow(object):
         font.setWeight(11)
         self.btn_back.setFont(font)
         self.btn_back.setStyleSheet("border-color: black;\n"
-"font: 90 10pt \"Arial\";\n"
-"color: #black;\n"
-"border-width: 1px;\n"
-"border-style: solid;\n"
-"background-color: rgb(255, 255, 255);")
+                                    "font: 90 10pt \"Arial\";\n"
+                                    "color: #black;\n"
+                                    "border-width: 1px;\n"
+                                    "border-style: solid;\n"
+                                    "background-color: rgb(255, 255, 255);")
         self.btn_back.setObjectName("btn_back")
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -205,18 +205,20 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Диаграмма Хассе"))
-        self.edt_setR.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Arial\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
+        self.edt_setR.setHtml(_translate("MainWindow",
+                                         "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                         "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                         "p, li { white-space: pre-wrap; }\n"
+                                         "</style></head><body style=\" font-family:\'Arial\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+                                         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
         self.edt_setR.setPlaceholderText(_translate("MainWindow", "Введите бинарное отношение R:"))
         self.lbl_props.setText(_translate("MainWindow", "Свойства бинарного отношения:"))
-        self.edt_setA.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Arial\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
+        self.edt_setA.setHtml(_translate("MainWindow",
+                                         "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                         "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                         "p, li { white-space: pre-wrap; }\n"
+                                         "</style></head><body style=\" font-family:\'Arial\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+                                         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
         self.edt_setA.setPlaceholderText(_translate("MainWindow", "Введите множество А:"))
         self.btn_run.setText(_translate("MainWindow", "Выполнить"))
         self.lbl_class.setText(_translate("MainWindow", "Класс бинарного отношения:"))

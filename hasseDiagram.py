@@ -102,7 +102,7 @@ class HasseDiagram:
             "font_size": 15,
             "font_color": "black",
             "node_size": 1000,
-            "node_color": "tab:blue", #148aff tab:blue
+            "node_color": "tab:blue",   # 148aff tab:blue
             "edgecolors": "black",
             "with_labels": True,
             "width": 2

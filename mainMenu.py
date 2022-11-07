@@ -1,5 +1,4 @@
 from ui_mainmenu import Ui_MainMenu
-from ui_mainwindow import Ui_MainWindow
 from ui_theorydialog import Ui_TheoryDialog
 from mainWindow import MainWindow
 from PyQt6.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox
@@ -44,7 +43,7 @@ class MainMenu(QMainWindow, Ui_MainMenu):
         self.setVisible(True)
 
     @staticmethod
-    def open_theory(self):
+    def open_theory():
         global theory
         theory = QDialog()
         ui = Ui_TheoryDialog()

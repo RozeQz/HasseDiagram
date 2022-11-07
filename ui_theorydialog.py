@@ -13,7 +13,8 @@ class Ui_TheoryDialog(object):
     def setupUi(self, TheoryDialog):
         TheoryDialog.setObjectName("TheoryDialog")
         TheoryDialog.resize(660, 490)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding,
+                                           QtWidgets.QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(TheoryDialog.sizePolicy().hasHeightForWidth())
@@ -37,9 +38,11 @@ class Ui_TheoryDialog(object):
         self.gridLayout = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setContentsMargins(10, 10, -1, -1)
         self.gridLayout.setObjectName("gridLayout")
-        spacerItem = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Policy.Minimum,
+                                           QtWidgets.QSizePolicy.Policy.Expanding)
         self.gridLayout.addItem(spacerItem, 4, 0, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Policy.Minimum,
+                                            QtWidgets.QSizePolicy.Policy.Fixed)
         self.gridLayout.addItem(spacerItem1, 2, 0, 1, 1)
         self.label_2 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         self.label_2.setMinimumSize(QtCore.QSize(200, 30))
@@ -61,7 +64,8 @@ class Ui_TheoryDialog(object):
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 1, 0, 1, 1)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 0, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 0, QtWidgets.QSizePolicy.Policy.Minimum,
+                                            QtWidgets.QSizePolicy.Policy.Expanding)
         self.gridLayout.addItem(spacerItem2, 0, 0, 1, 1)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.gridLayout_2.addWidget(self.scrollArea, 0, 0, 1, 1)
@@ -72,5 +76,22 @@ class Ui_TheoryDialog(object):
     def retranslateUi(self, TheoryDialog):
         _translate = QtCore.QCoreApplication.translate
         TheoryDialog.setWindowTitle(_translate("TheoryDialog", "Теория"))
-        self.label_2.setText(_translate("TheoryDialog", "<p><strong>Бинарное отношение</strong> &ndash; отношение между множествами A и B, то есть всякое подмножество декартова произведения этих множеств.</p><p><strong>Отношение порядка</strong> &ndash; бинарное отношение между элементами данного множества, по своим свойствам сходное со свойствами отношения неравенства.</p><p><strong>Упорядоченное множество</strong> &ndash; множество вместе с заданным на нем отношением порядка.</p><p><strong>Диаграмма Хассе</strong> &ndash; это графическое представление отношения элементов упорядоченного множества.<br />Диаграмма Хассе предназначена для наглядного графического изображения отношения порядка, заданного на конечном множестве малой мощности.</p><p><em>Правила построения:</em></p><ol><li>Элементы множества изображаются кружками на плоскости;</li><li>Если y доминирует над x, то кружок y изображается выше кружка x, и если есть доминирование, соединяются прямой линией;</li><li>Если 2 элемента одного уровня доминирования, они изображаются на одном уровне.</li></ol>"))
+        self.label_2.setText(_translate("TheoryDialog", "<p><strong>Бинарное отношение</strong> &ndash; "
+                                                        "отношение между множествами A и B, то есть всякое "
+                                                        "подмножество декартова произведения этих множеств.</p>"
+                                                        "<p><strong>Отношение порядка</strong> &ndash; бинарное "
+                                                        "отношение между элементами данного множества, по своим "
+                                                        "свойствам сходное со свойствами отношения неравенства.</p>"
+                                                        "<p><strong>Упорядоченное множество</strong> &ndash; множество "
+                                                        "вместе с заданным на нем отношением порядка.</p><p><strong>"
+                                                        "Диаграмма Хассе</strong> &ndash; это графическое представление"
+                                                        " отношения элементов упорядоченного множества.<br />Диаграмма "
+                                                        "Хассе предназначена для наглядного графического изображения "
+                                                        "отношения порядка, заданного на конечном множестве малой "
+                                                        "мощности.</p><p><em>Правила построения:</em></p><ol><li>"
+                                                        "Элементы множества изображаются кружками на плоскости;</li>"
+                                                        "<li>Если y доминирует над x, то кружок y изображается выше "
+                                                        "кружка x, и если есть доминирование, соединяются прямой "
+                                                        "линией;</li><li>Если 2 элемента одного уровня доминирования, "
+                                                        "они изображаются на одном уровне.</li></ol>"))
         self.label.setText(_translate("TheoryDialog", "Теория"))

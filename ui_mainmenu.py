@@ -34,12 +34,12 @@ class Ui_MainMenu(object):
         font.setWeight(11)
         self.btn_create.setFont(font)
         self.btn_create.setStyleSheet("border-color: #3C66DC;\n"
-"font: 90 12pt \"Arial\";\n"
-"color: #3C66DC;\n"
-"border-width: 2px;\n"
-"border-style: solid;\n"
-"background-color: rgb(255, 255, 255);\n"
-"")
+                                      "font: 90 12pt \"Arial\";\n"
+                                      "color: #3C66DC;\n"
+                                      "border-width: 2px;\n"
+                                      "border-style: solid;\n"
+                                      "background-color: rgb(255, 255, 255);\n"
+                                      "")
         self.btn_create.setObjectName("btn_create")
         self.btn_theory = QtWidgets.QPushButton(self.centralwidget)
         self.btn_theory.setGeometry(QtCore.QRect(45, 220, 170, 31))
@@ -51,11 +51,11 @@ class Ui_MainMenu(object):
         font.setWeight(11)
         self.btn_theory.setFont(font)
         self.btn_theory.setStyleSheet("border-color: #3C66DC;\n"
-"font: 90 12pt \"Arial\";\n"
-"color: #3C66DC;\n"
-"border-width: 2px;\n"
-"border-style: solid;\n"
-"background-color: rgb(255, 255, 255);")
+                                      "font: 90 12pt \"Arial\";\n"
+                                      "color: #3C66DC;\n"
+                                      "border-width: 2px;\n"
+                                      "border-style: solid;\n"
+                                      "background-color: rgb(255, 255, 255);")
         self.btn_theory.setObjectName("btn_theory")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(30, 20, 200, 80))
@@ -69,7 +69,7 @@ class Ui_MainMenu(object):
         font.setStyleStrategy(QtGui.QFont.StyleStrategy.PreferDefault)
         self.label.setFont(font)
         self.label.setStyleSheet("white-space: normal;\n"
-"color: #3C66DC;")
+                                 "color: #3C66DC;")
         self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label.setWordWrap(True)
         self.label.setTextInteractionFlags(QtCore.Qt.TextInteractionFlag.LinksAccessibleByMouse)
