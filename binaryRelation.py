@@ -63,10 +63,10 @@ class BinaryRelation:
 
     # Транзитивность
     def is_transitive(self) -> bool:
-        second_elements = {b for (a, b) in self.R}    # множество вторых элементов
+        second_elements = {b for (a, b) in self.R}  # множество вторых элементов
         for (a, b) in self.R:
             for c in second_elements:
-                if (b, c) in self.R and (a, c) not in self.R:     # if xRy and yRz => xRz
+                if (b, c) in self.R and (a, c) not in self.R:  # if xRy and yRz => xRz
                     return False
         return True
 
@@ -100,7 +100,7 @@ class BinaryRelation:
 
     # Сделать отношение несимметричным
     def makeNotSymmetrical(self):
-        if self.is_symmetrical():
+        while self.is_symmetrical():
             for (x, y) in self.R:
                 if (x != y) and ((y, x) in self.R):
                     if random.choice([True, False]):
@@ -118,8 +118,9 @@ class BinaryRelation:
 
     # Сделать отношением порядка
     def makeOrder(self):
-        self.makeNotSymmetrical()
-        self.makeTransitive()
+        while not self.is_order():
+            self.makeNotSymmetrical()
+            self.makeTransitive()
 
     # Классы бинарных отношений
     def class_of_relation(self) -> str:
@@ -134,6 +135,8 @@ class BinaryRelation:
                     return "strict order"
                 else:
                     return "strict preorder"
+            else:
+                return "order"
         else:
             if self.is_reflexive() and self.is_symmetrical():
                 if self.is_transitive():

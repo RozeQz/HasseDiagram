@@ -158,7 +158,7 @@ class Ui_MainWindow(object):
         self.lbl_class.setFont(font)
         self.lbl_class.setObjectName("lbl_class")
         self.lbl_bin_class = QtWidgets.QLabel(self.centralwidget)
-        self.lbl_bin_class.setGeometry(QtCore.QRect(20, 370, 260, 16))
+        self.lbl_bin_class.setGeometry(QtCore.QRect(20, 370, 300, 16))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)

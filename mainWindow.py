@@ -92,7 +92,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             bin_class = binary.class_of_relation()
             if bin_class == "unknown":
-                self.lbl_bin_class.setText("Не входит ни в один класс")
+                self.lbl_bin_class.setText("Не входит ни в один класс бинарных отношений")
             if bin_class == "tolerance":
                 self.lbl_bin_class.setText("Толерантность")
             if bin_class == "equivalence":
@@ -105,6 +105,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.lbl_bin_class.setText("Строгий порядок")
             if bin_class == "strict preorder":
                 self.lbl_bin_class.setText("Строгий предпорядок")
+            if bin_class == "order":
+                self.lbl_bin_class.setText("Не входит ни в один класс - отношение порядка")
 
             self.resize_event()
 
