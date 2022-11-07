@@ -58,6 +58,9 @@ celerybeat-schedule
 # dotenv
 .env
 
+# ui
+*.ui
+
 # virtualenv
 venv/
 ENV/
@@ -100,5 +103,3 @@ ENV/
 # .idea/modules.xml
 # .idea/*.iml
 # .idea/modules
-# *.iml
-# *.ipr
