@@ -44,6 +44,21 @@ class HasseDiagram:
                             else:
                                 dominance_dict.pop(k)  # удаляем рассмотренную вершину
 
+        # чистим доминирование сверху вниз
+        nodes = set()
+        for k, v in list(reversed(levels_dict.items())):
+            temp_level = list()
+            for el in v:
+                if el in nodes:
+                    temp = []
+                    [temp.append(x) for x in levels_dict[k] if x not in nodes]
+                    levels_dict[k] = temp
+                else:
+                    temp_level.append(el)
+            for i in temp_level:
+                nodes.add(i)
+
+        # убираем дубликаты
         nodes = set()
         for k, v in list(reversed(levels_dict.items())):
             for el in v:
