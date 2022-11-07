@@ -1,4 +1,5 @@
 import re
+import random
 import matplotlib.pyplot as plt
 import warnings
 with warnings.catch_warnings():
@@ -21,16 +22,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.parent = parent
 
-        self.add_functions(parent)  # Добавление сигналов
+        self.btn_run.clicked.connect(self.button_click)  # TODO: генеировать рандомное бинарное отношение порядка
+        self.btn_back.clicked.connect(lambda: self.return_to_mainmenu(parent))
+        self.btn_help.clicked.connect(self.open_help)
+        self.btn_gen.clicked.connect(self.input_random_order)
 
     def closeEvent(self, event):
         self.window_closed.emit()
         event.accept()
-
-    def add_functions(self, parent):
-        self.btn_run.clicked.connect(self.button_click)  # TODO: генеировать рандомное бинарное отношение порядка
-        self.btn_back.clicked.connect(lambda: self.return_to_mainmenu(parent))
-        self.btn_help.clicked.connect(self.open_help)
 
     @staticmethod
     def create_diagram(bin_rel) -> HasseDiagram:
@@ -38,9 +37,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         return HasseDiagram(bin_rel)
 
     def resize_event(self):
-        self.resize(390, 410)
-        self.setMinimumSize(QtCore.QSize(390, 410))
-        self.setMaximumSize(QtCore.QSize(390, 410))
+        self.resize(410, 410)
+        self.setMinimumSize(QtCore.QSize(410, 410))
+        self.setMaximumSize(QtCore.QSize(410, 410))
 
     def output(self):
         try:
@@ -120,8 +119,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def input(self) -> list:  # Ввод данных
         new_R = []
-        A = set(map(str, re.split(r' *, *', ',' + self.edt_setA.toPlainText() + ',')))  # Ввод числового множества
-        A.discard('')
+        A = list(map(str, re.split(r' *, *', ',' + self.edt_setA.toPlainText() + ',')))  # Ввод числового множества
+        A = list(x for x in A if x != '')
         R = re.findall(r'(\([^)]*\)), *',
                        self.edt_setR.toPlainText() + ", ")  # Ввод бинарного отношения перечислением пар
         for i in R:
@@ -153,6 +152,32 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                             "Неверное количество элементов в паре, задающей бинарное отношение.")
                 else:
                     return [A, R]
+
+    def create_random_binary_relation(self) -> BinaryRelation:
+        num_A = random.randrange(3, 7)
+        A = list()
+        R = list()
+        for i in range(1, num_A + 1):
+            A.append(i)
+
+        num_R = random.randrange(3, 10)
+        for i in range(num_R):
+            first = random.choice(A)
+            second = random.choice(A)
+            R.append((first, second))
+
+        return BinaryRelation(A, R)
+
+    def input_random_order(self):
+        bin_rel = self.create_random_binary_relation()
+        bin_rel.makeOrder()
+        self.edt_setA.setText(str(bin_rel.A)[1:-1])
+        self.edt_setR.setText(str(bin_rel.R)[1:-1])
+
+    def input_random_binary_relation(self):
+        bin_rel = self.create_random_binary_relation()
+        self.edt_setA.setText(str(bin_rel.A)[1:-1])
+        self.edt_setR.setText(str(bin_rel.R)[1:-1])
 
     @staticmethod
     def error_handle(err_type):

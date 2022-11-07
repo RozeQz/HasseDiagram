@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>390</width>
+    <width>410</width>
     <height>175</height>
    </rect>
   </property>
@@ -21,13 +21,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>390</width>
+    <width>410</width>
     <height>175</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>390</width>
+    <width>410</width>
     <height>175</height>
    </size>
   </property>
@@ -121,6 +121,9 @@
 border-width: 1px;
 border-style: solid;</string>
     </property>
+    <property name="tabChangesFocus">
+     <bool>true</bool>
+    </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -179,6 +182,9 @@ p, li { white-space: pre-wrap; }
 border-width: 1px;
 border-style: solid;</string>
     </property>
+    <property name="tabChangesFocus">
+     <bool>true</bool>
+    </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -218,10 +224,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="btn_run">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>85</x>
       <y>130</y>
-      <width>111</width>
-      <height>31</height>
+      <width>130</width>
+      <height>35</height>
      </rect>
     </property>
     <property name="font">
@@ -324,7 +330,7 @@ font-weight: bold</string>
      <rect>
       <x>300</x>
       <y>50</y>
-      <width>75</width>
+      <width>91</width>
       <height>23</height>
      </rect>
     </property>
@@ -354,7 +360,7 @@ background-color: rgb(255, 255, 255);</string>
      <rect>
       <x>300</x>
       <y>20</y>
-      <width>75</width>
+      <width>91</width>
       <height>23</height>
      </rect>
     </property>
@@ -377,6 +383,48 @@ background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Вернуться</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_gen">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>80</y>
+      <width>91</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>10</pointsize>
+      <weight>11</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">white-space: normal;
+border-color: black;
+font: 90 10pt &quot;Arial&quot;;
+color: #black;
+border-width: 1px;
+border-style: solid;
+background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Генерировать
+отношение
+порядка</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>

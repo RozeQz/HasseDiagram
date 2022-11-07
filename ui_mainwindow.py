@@ -13,14 +13,14 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(390, 175)
+        MainWindow.resize(410, 175)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(390, 175))
-        MainWindow.setMaximumSize(QtCore.QSize(390, 175))
+        MainWindow.setMinimumSize(QtCore.QSize(410, 175))
+        MainWindow.setMaximumSize(QtCore.QSize(410, 175))
         font = QtGui.QFont()
         font.setFamily("Arial")
         MainWindow.setFont(font)
@@ -71,6 +71,7 @@ class Ui_MainWindow(object):
         self.edt_setR.setStyleSheet("border-color: #3C66DC;\n"
                                     "border-width: 1px;\n"
                                     "border-style: solid;")
+        self.edt_setR.setTabChangesFocus(True)
         self.edt_setR.setObjectName("edt_setR")
         self.lbl_props = QtWidgets.QLabel(self.centralwidget)
         self.lbl_props.setGeometry(QtCore.QRect(20, 180, 260, 16))
@@ -96,6 +97,7 @@ class Ui_MainWindow(object):
         self.edt_setA.setStyleSheet("border-color: #3C66DC;\n"
                                     "border-width: 1px;\n"
                                     "border-style: solid;")
+        self.edt_setA.setTabChangesFocus(True)
         self.edt_setA.setObjectName("edt_setA")
         self.lbl_antisym = QtWidgets.QLabel(self.centralwidget)
         self.lbl_antisym.setGeometry(QtCore.QRect(20, 270, 260, 16))
@@ -112,7 +114,7 @@ class Ui_MainWindow(object):
         self.lbl_antisym.setText("")
         self.lbl_antisym.setObjectName("lbl_antisym")
         self.btn_run = QtWidgets.QPushButton(self.centralwidget)
-        self.btn_run.setGeometry(QtCore.QRect(90, 130, 111, 31))
+        self.btn_run.setGeometry(QtCore.QRect(85, 130, 130, 35))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(12)
@@ -166,7 +168,7 @@ class Ui_MainWindow(object):
         self.lbl_bin_class.setText("")
         self.lbl_bin_class.setObjectName("lbl_bin_class")
         self.btn_help = QtWidgets.QPushButton(self.centralwidget)
-        self.btn_help.setGeometry(QtCore.QRect(300, 50, 75, 23))
+        self.btn_help.setGeometry(QtCore.QRect(300, 50, 91, 23))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
@@ -182,7 +184,7 @@ class Ui_MainWindow(object):
                                     "background-color: rgb(255, 255, 255);")
         self.btn_help.setObjectName("btn_help")
         self.btn_back = QtWidgets.QPushButton(self.centralwidget)
-        self.btn_back.setGeometry(QtCore.QRect(300, 20, 75, 23))
+        self.btn_back.setGeometry(QtCore.QRect(300, 20, 91, 23))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
@@ -197,6 +199,26 @@ class Ui_MainWindow(object):
                                     "border-style: solid;\n"
                                     "background-color: rgb(255, 255, 255);")
         self.btn_back.setObjectName("btn_back")
+        self.btn_gen = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_gen.setGeometry(QtCore.QRect(300, 80, 91, 61))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(11)
+        self.btn_gen.setFont(font)
+        self.btn_gen.setAutoFillBackground(False)
+        self.btn_gen.setStyleSheet("white-space: normal;\n"
+                                   "border-color: black;\n"
+                                   "font: 90 10pt \"Arial\";\n"
+                                   "color: #black;\n"
+                                   "border-width: 1px;\n"
+                                   "border-style: solid;\n"
+                                   "background-color: rgb(255, 255, 255);")
+        self.btn_gen.setAutoRepeat(False)
+        self.btn_gen.setFlat(False)
+        self.btn_gen.setObjectName("btn_gen")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -224,3 +246,6 @@ class Ui_MainWindow(object):
         self.lbl_class.setText(_translate("MainWindow", "Класс бинарного отношения:"))
         self.btn_help.setText(_translate("MainWindow", "Справка"))
         self.btn_back.setText(_translate("MainWindow", "Вернуться"))
+        self.btn_gen.setText(_translate("MainWindow", "Генерировать\n"
+                                                      "отношение\n"
+                                                      "порядка"))
