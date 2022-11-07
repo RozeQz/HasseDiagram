@@ -1,14 +1,19 @@
+import random
+
 import numpy as np
 
 
 # Класс Бинарного отношения
 class BinaryRelation:
     def __init__(self, a, r):
+        self.__A = []
         self.__R = []
+        for x in a:
+            if x not in self.__A:
+                self.__A.append(x)
         for x in r:
             if x not in self.__R:
                 self.__R.append(x)
-        self.__A = a
 
     @property
     def R(self) -> list:
@@ -16,18 +21,21 @@ class BinaryRelation:
 
     @R.setter
     def R(self, r):
+        self.__R = []
         for x in r:
             if x not in self.__R:
                 self.__R.append(x)
-        self.__R = r
 
     @property
-    def A(self) -> set:
+    def A(self) -> list:
         return self.__A
 
     @A.setter
     def A(self, a):
-        self.__A = a
+        self.__A = []
+        for x in a:
+            if x not in self.__A:
+                self.__A.append(x)
 
     # Матричное представление бинарного отношения
     def get_matrix(self):
@@ -74,6 +82,44 @@ class BinaryRelation:
     # Является ли порядком
     def is_order(self) -> bool:
         return self.is_transitive() and not self.is_symmetrical()
+
+    # Сделать отношение рефлексивным
+    def makeReflexive(self):
+        if not self.is_reflexive():
+            for k in self.A:
+                if ((k, k) not in self.R):
+                    self.R.append((k, k))
+
+    # Сделать отношение антисимметричным
+    def makeAntisymmetric(self):
+        if not self.is_antisymm():
+            for (x, y) in self.R:
+                for (a, b) in self.R:
+                    if ((x != y) and (x == b) and (y == a)):  # Если есть пример, нарушающий антисимметричность
+                        self.R.remove((y, x))  # Удаляем пару, которая нарушает антисимметричность
+
+    # Сделать отношение несимметричным
+    def makeNotSymmetrical(self):
+        if self.is_symmetrical():
+            for (x, y) in self.R:
+                if (x != y) and ((y, x) in self.R):
+                    if random.choice([True, False]):
+                        self.R.remove((y, x))
+                    else:
+                        self.R.remove((x, y))
+
+    # Сделать отношение транзитивным
+    def makeTransitive(self):
+        if not self.is_transitive():
+            for (a, b) in self.R:
+                for (c, d) in self.R:
+                    if ((b == c) and (a != b) and ((a, d) not in self.R)):
+                        self.R.append((a, d))
+
+    # Сделать отношением порядка
+    def makeOrder(self):
+        self.makeNotSymmetrical()
+        self.makeTransitive()
 
     # Классы бинарных отношений
     def class_of_relation(self) -> str:
