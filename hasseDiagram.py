@@ -52,6 +52,18 @@ class HasseDiagram:
                             else:
                                 dominance_dict.pop(k)  # удаляем рассмотренную вершину
 
+        # если на последнем уровне стоят элементы разного уровня доминации
+        for k, v in list(reversed(levels_dict.items())):
+            for el in v:
+                dict_of_elements = self.__bin_rel.second_elements(self.__get_dominance_list())
+                if dict_of_elements[el]:
+                    for x in dict_of_elements[el]:
+                        try:
+                            if x not in levels_dict[k + 1]:
+                                levels_dict.setdefault(k + 1, []).append(x)
+                        except KeyError:
+                            levels_dict.setdefault(k + 1, []).append(x)
+
         # чистим доминирование сверху вниз
         nodes = set()
         for k, v in list(reversed(levels_dict.items())):
