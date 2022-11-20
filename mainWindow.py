@@ -105,8 +105,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.lbl_bin_class.setText("Строгий порядок")
             if bin_class == "strict preorder":
                 self.lbl_bin_class.setText("Строгий предпорядок")
-            if bin_class == "order":
-                self.lbl_bin_class.setText("Не входит ни в один класс - отношение порядка")
 
             self.resize_event()
 
@@ -169,7 +167,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def input_random_order(self):
         bin_rel = self.create_random_binary_relation()
-        bin_rel.makeOrder()
+        bin_rel.make_order()
         self.edt_setA.setText(str(bin_rel.A)[1:-1])
         self.edt_setR.setText(str(bin_rel.R)[1:-1])
 

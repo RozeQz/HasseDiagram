@@ -84,20 +84,20 @@ class BinaryRelation:
         return self.is_transitive() and not self.is_symmetrical() and (self.is_reflexive() or self.is_irreflexive())
 
     # Сделать отношение рефлексивным
-    def makeReflexive(self):
+    def make_reflexive(self):
         if not self.is_reflexive():
             for k in self.A:
                 if (k, k) not in self.R:
                     self.R.append((k, k))
 
-    def makeIrreflexive(self):
+    def make_irreflexive(self):
         if not self.is_irreflexive():
             for k in self.A:
                 if (k, k) in self.R:
                     self.R.remove((k, k))
 
     # Сделать отношение антисимметричным
-    def makeAntisymmetric(self):
+    def make_antisymmetric(self):
         if not self.is_antisymm():
             for (x, y) in self.R:
                 for (a, b) in self.R:
@@ -105,7 +105,7 @@ class BinaryRelation:
                         self.R.remove((y, x))  # Удаляем пару, которая нарушает антисимметричность
 
     # Сделать отношение несимметричным
-    def makeNotSymmetrical(self):
+    def make_not_symmetrical(self):
         while self.is_symmetrical():
             for (x, y) in self.R:
                 if (x != y) and ((y, x) in self.R):
@@ -115,7 +115,7 @@ class BinaryRelation:
                         self.R.remove((x, y))
 
     # Сделать отношение транзитивным
-    def makeTransitive(self):
+    def make_transitive(self):
         if not self.is_transitive():
             for (a, b) in self.R:
                 for (c, d) in self.R:
@@ -123,19 +123,19 @@ class BinaryRelation:
                         self.R.append((a, d))
 
     # Сделать отношением порядка
-    def makeOrder(self):
+    def make_order(self):
         while not self.is_order():
             counter = 0
             while not self.is_order() and counter < 5:
                 if random.choice([True, False]):
-                    self.makeNotSymmetrical()
+                    self.make_not_symmetrical()
                 else:
-                    self.makeIrreflexive()
-                self.makeTransitive()
+                    self.make_irreflexive()
+                self.make_transitive()
                 counter += 1
             if counter >= 5:
-                self.makeReflexive()
-                self.makeTransitive()
+                self.make_reflexive()
+                self.make_transitive()
 
     # Классы бинарных отношений
     def class_of_relation(self) -> str:
