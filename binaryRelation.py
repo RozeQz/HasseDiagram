@@ -81,21 +81,27 @@ class BinaryRelation:
 
     # Является ли порядком
     def is_order(self) -> bool:
-        return self.is_transitive() and not self.is_symmetrical()
+        return self.is_transitive() and not self.is_symmetrical() and (self.is_reflexive() or self.is_irreflexive())
 
     # Сделать отношение рефлексивным
     def makeReflexive(self):
         if not self.is_reflexive():
             for k in self.A:
-                if ((k, k) not in self.R):
+                if (k, k) not in self.R:
                     self.R.append((k, k))
+
+    def makeIrreflexive(self):
+        if not self.is_irreflexive():
+            for k in self.A:
+                if (k, k) in self.R:
+                    self.R.remove((k, k))
 
     # Сделать отношение антисимметричным
     def makeAntisymmetric(self):
         if not self.is_antisymm():
             for (x, y) in self.R:
                 for (a, b) in self.R:
-                    if ((x != y) and (x == b) and (y == a)):  # Если есть пример, нарушающий антисимметричность
+                    if (x != y) and (x == b) and (y == a):  # Если есть пример, нарушающий антисимметричность
                         self.R.remove((y, x))  # Удаляем пару, которая нарушает антисимметричность
 
     # Сделать отношение несимметричным
@@ -119,8 +125,17 @@ class BinaryRelation:
     # Сделать отношением порядка
     def makeOrder(self):
         while not self.is_order():
-            self.makeNotSymmetrical()
-            self.makeTransitive()
+            counter = 0
+            while not self.is_order() and counter < 5:
+                if random.choice([True, False]):
+                    self.makeNotSymmetrical()
+                else:
+                    self.makeIrreflexive()
+                self.makeTransitive()
+                counter += 1
+            if counter >= 5:
+                self.makeReflexive()
+                self.makeTransitive()
 
     # Классы бинарных отношений
     def class_of_relation(self) -> str:
@@ -135,8 +150,6 @@ class BinaryRelation:
                     return "strict order"
                 else:
                     return "strict preorder"
-            else:
-                return "order"
         else:
             if self.is_reflexive() and self.is_symmetrical():
                 if self.is_transitive():
