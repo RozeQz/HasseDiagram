@@ -120,37 +120,44 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         return BinaryRelation(self.input()[0], self.input()[1])
 
     def input(self) -> list:  # Ввод данных
+        rubbish_text = re.sub(r'\([^()]*\)', '', self.edt_setR.toPlainText())
+        alnum_outta_brackets = re.search(r'\w|\d', rubbish_text)
+        if alnum_outta_brackets:
+            raise IOError("Некорректный ввод бинарного отношения.")
+
         A = list(map(str, re.split(r' *, *', ',' + self.edt_setA.toPlainText() + ',')))  # Ввод числового множества
         A = list(x for x in A if x != '')
         R = []
-        R_raw = re.findall(r'\( *(\w+ *, *\w+) *\) *, *',
-                           self.edt_setR.toPlainText() + ",")  # Ввод бинарного отношения перечислением пар
-        for i in R_raw:
-            R_str = tuple(map(str, re.split(r' *, *', i)))  # Преобразуем в пару строковых значений
+        R_strings = re.findall(r'\( *([^\)]*) *\) *, *', self.edt_setR.toPlainText() + ",")  # Ввод бинарного отношения перечислением пар
+
+        for elem in R_strings:
+            R_str = tuple(map(str, re.split(r' *, *', elem)))  # Преобразуем в пару строковых значений
             R.append(R_str)
 
-        if len(A) == 0 or len(R) == 0:
+        if len(self.edt_setA.toPlainText()) == 0 or len(self.edt_setR.toPlainText()) == 0:
             raise IOError("Поля ввода не могут быть пустыми.")
-        else:
-            # Уникальные элементы в множестве пар, задающих бинарное отношение
-            list_unique = []
-            for i in R:
-                i = list(i)
-                list_unique.extend(i)
-            list_unique = list(set(list_unique))
 
-            if not set(list_unique).issubset(set(A)):
+        if not R:
+            raise IOError("Некорректный ввод бинарного отношения.")
+
+        # Уникальные элементы в множестве пар, задающих бинарное отношение
+        list_unique = []
+        for i in R:
+            i = list(i)
+            list_unique.extend(i)
+        list_unique = list(set(list_unique))
+
+        if not set(list_unique).issubset(set(A)):
+            raise IOError(
+                "Бинарное отношение R не является подмножеством декартова "
+                "произведения множества A на себя. Пожалуйста, задайте R ⊆ A^2.")
+
+        for x in R:
+            if len(x) != 2:
                 raise IOError(
-                    "Бинарное отношение R не является подмножеством декартова "
-                    "произведения множества A на себя. Пожалуйста, задайте R ⊆ A^2.")
+                    "Неверное количество элементов в паре, задающей бинарное отношение.")
 
-            else:
-                for x in R:
-                    if len(x) != 2:
-                        raise IOError(
-                            "Неверное количество элементов в паре, задающей бинарное отношение.")
-                else:
-                    return [A, R]
+        return [A, R]
 
     def create_random_binary_relation(self) -> BinaryRelation:
         num_A = random.randrange(3, 7)
