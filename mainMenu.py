@@ -10,6 +10,7 @@ class MainMenu(QMainWindow, Ui_MainMenu):
         self.setupUi(self)
 
         self.parent = parent
+        self.theory_dialog = None
 
         self.btn_create.clicked.connect(self.open_hasse)
         self.btn_theory.clicked.connect(self.open_theory)
@@ -42,10 +43,9 @@ class MainMenu(QMainWindow, Ui_MainMenu):
     def open_mainmenu(self):
         self.setVisible(True)
 
-    @staticmethod
-    def open_theory():
-        global theory
-        theory = QDialog()
-        ui = Ui_TheoryDialog()
-        ui.setupUi(theory)
-        theory.show()
+    def open_theory(self):
+        if self.theory_dialog is None:
+            self.theory_dialog = QDialog()
+            ui = Ui_TheoryDialog()
+            ui.setupUi(self.theory_dialog)
+        self.theory_dialog.show()

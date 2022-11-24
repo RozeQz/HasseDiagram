@@ -21,6 +21,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
         self.parent = parent
+        self.error_msg = None
+        self.help_msg = None
 
         self.btn_run.clicked.connect(self.button_click)  # TODO: генеировать рандомное бинарное отношение порядка
         self.btn_back.clicked.connect(lambda: self.return_to_mainmenu(parent))
@@ -176,28 +178,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.edt_setA.setText(str(bin_rel.A)[1:-1])
         self.edt_setR.setText(str(bin_rel.R)[1:-1])
 
-    @staticmethod
-    def error_handle(err_type):
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Icon.Critical)
-        msg.setText("Ошибка")
-        msg.setInformativeText(str(err_type))
-        msg.setWindowTitle("Ошибка")
-        msg.exec()
+    def error_handle(self, err_type):
+        self.error_msg = QMessageBox()
+        self.error_msg.setIcon(QMessageBox.Icon.Critical)
+        self.error_msg.setText("Ошибка")
+        self.error_msg.setInformativeText(str(err_type))
+        self.error_msg.setWindowTitle("Ошибка")
+        self.error_msg.exec()
 
     def return_to_mainmenu(self, menu):
         self.close()
         menu.setVisible(True)
 
-    @staticmethod
-    def open_help():
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Icon.Information)
-        msg.setText("Справка по вводу данных")
-        msg.setInformativeText(
-            "Поле ввода множества A должно заполняться элементами множества через запятую. Например: 1, 2, 3.\n"
-            "Поле ввода бинарного отношения R должно заполняться парами элементов, "
-            "записанных в круглых скобках, через запятую. "
-            "Сами пары должны быть разделены запятыми. Например: (1,2), (1,3), (2,3).")
-        msg.setWindowTitle("Справка по вводу данных")
-        msg.exec()
+    def open_help(self):
+        if self.help_msg is None:
+            self.help_msg = QMessageBox()
+            self.help_msg.setIcon(QMessageBox.Icon.Information)
+            self.help_msg.setText("Справка по вводу данных")
+            self.help_msg.setInformativeText(
+                "Поле ввода множества A должно заполняться элементами множества через запятую. Например: 1, 2, 3.\n"
+                "Поле ввода бинарного отношения R должно заполняться парами элементов, "
+                "записанных в круглых скобках, через запятую. "
+                "Сами пары должны быть разделены запятыми. Например: (1,2), (1,3), (2,3).")
+            self.help_msg.setWindowTitle("Справка по вводу данных")
+        self.help_msg.exec()
