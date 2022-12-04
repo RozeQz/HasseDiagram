@@ -75,7 +75,7 @@ class Ui_TheoryDialog(object):
 
     def retranslateUi(self, TheoryDialog):
         _translate = QtCore.QCoreApplication.translate
-        TheoryDialog.setWindowTitle(_translate("TheoryDialog", "Теория"))
+        TheoryDialog.setWindowTitle(_translate("TheoryDialog", "Теоритические сведения"))
         self.label_2.setText(_translate("TheoryDialog", "<p><strong>Бинарное отношение</strong> &ndash; "
                                                         "отношение между множествами A и B, то есть всякое "
                                                         "подмножество декартова произведения этих множеств.</p>"
@@ -94,4 +94,4 @@ class Ui_TheoryDialog(object):
                                                         "кружка x, и если есть доминирование, соединяются прямой "
                                                         "линией;</li><li>Если 2 элемента одного уровня доминирования, "
                                                         "они изображаются на одном уровне.</li></ol>"))
-        self.label.setText(_translate("TheoryDialog", "Теория"))
+        self.label.setText(_translate("TheoryDialog", "Теоритические сведения"))
