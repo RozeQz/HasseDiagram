@@ -15,6 +15,7 @@ from ui_mainwindow import Ui_MainWindow
 # Закрытие окна создания диаграммы Хассе
 class MainWindow(QMainWindow, Ui_MainWindow):
     window_closed = QtCore.pyqtSignal()
+    number_of_diagrams = 0
 
     def __init__(self, parent=None):
         super().__init__()
@@ -77,8 +78,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 for button in unwanted_buttons:
                     fig.canvas.manager.toolmanager.remove_tool(button)
 
+                # Задаем название диаграмме
+                self.number_of_diagrams += 1
+                name_of_diagram = "Диаграмма " + str(self.number_of_diagrams)
+                fig.canvas.manager.set_window_title(name_of_diagram)
+
                 plt.show()
                 hd.draw()
+
+                # Сохраняем параметры диаграммы в соответствующем файле
+                with open(name_of_diagram + ".txt", "w") as file:
+                    params = "A: " + str(hd.get_bin_rel().A) + "\nR: " + str(hd.get_bin_rel().R) + "\n"
+                    file.write(params)
 
             else:
                 msg = QMessageBox()

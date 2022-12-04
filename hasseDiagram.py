@@ -121,6 +121,9 @@ class HasseDiagram:
             if x.name == n:
                 return x
 
+    def get_bin_rel(self):
+        return self.__bin_rel
+
     def draw(self):
         self.__create_nodes()  # задаем позиции вершин
 

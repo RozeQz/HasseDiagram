@@ -119,7 +119,7 @@ class BinaryRelation:
         if not self.is_transitive():
             for (a, b) in self.R:
                 for (c, d) in self.R:
-                    if ((b == c) and (a != b) and ((a, d) not in self.R)):
+                    if (b == c) and (a != b) and ((a, d) not in self.R):
                         self.R.append((a, d))
 
     # Сделать отношением порядка

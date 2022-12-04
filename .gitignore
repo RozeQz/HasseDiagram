@@ -58,6 +58,9 @@ celerybeat-schedule
 # dotenv
 .env
 
+# saved diagrams
+*.txt
+
 # ui
 *.ui
 
