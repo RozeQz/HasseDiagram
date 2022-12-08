@@ -49,21 +49,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             binary = self.create_binary_relation()
 
             if binary.is_reflexive():
-                self.lbl_reflex.setText("   • Рефлексивно!")
+                reflex_text = "Рефлексивно"
             elif binary.is_irreflexive():
-                self.lbl_reflex.setText("   • Иррефлексивно!")
+                reflex_text = "Иррефлексивно"
             else:
-                self.lbl_reflex.setText("   • Нерефлексивно!")
+                reflex_text = "Нерефлексивно"
+            self.lbl_reflex.setText(f"   • {reflex_text}!")
 
-            self.lbl_symm.setText(
-                "   • Симметрично!") if binary.is_symmetrical() else self.lbl_symm.setText(
-                "   • Несимметрично!")
-            self.lbl_trans.setText(
-                "   • Транзитивно!") if binary.is_transitive() else self.lbl_trans.setText(
-                "   • Нетранзитивно!")
-            self.lbl_antisym.setText(
-                "   • Антисимметрично!") if binary.is_antisymm() else self.lbl_antisym.setText(
-                "   • Не антисимметрично!")
+            symm_text = "Симметрично" if binary.is_symmetrical() else "Несимметрично"
+            self.lbl_symm.setText(f"   • {symm_text}!")
+
+            trans_text = "Транзитивно" if binary.is_transitive() else "Нетранзитивно"
+            self.lbl_trans.setText(f"   • {trans_text}!")
+
+            antisymm_text = "Антисимметрично" if binary.is_antisymm() else "Не антисимметрично"
+            self.lbl_antisym.setText(f"   • {antisymm_text}!")
 
             if binary.is_order():
                 hd = self.create_diagram(binary)
@@ -128,7 +128,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.output()
 
     def create_binary_relation(self) -> BinaryRelation:
-        return BinaryRelation(self.input()[0], self.input()[1])
+        return BinaryRelation(*self.input())
 
     def input(self) -> list:  # Ввод данных
         rubbish_text = re.sub(r'\([^()]*\)', '', self.edt_setR.toPlainText())
@@ -178,7 +178,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for i in range(1, num_A + 1):
             A.append(i)
 
-        num_R = random.randrange(5, 10)
+        num_R = random.randrange(7, 12)
         for i in range(num_R):
             first = random.choice(A)
             second = random.choice(A)
