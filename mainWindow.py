@@ -169,6 +169,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 raise IOError(
                     "Неверное количество элементов в паре, задающей бинарное отношение.")
 
+        if len(set(A)) > 40:
+            raise IOError("Слишком большое количество элементов множества.")
+
+        if len(set(R)) > 300:
+            raise IOError("Слишком большое количество пар, задающих бинарное отношение.")
+
         return [A, R]
 
     def create_random_binary_relation(self) -> BinaryRelation:
@@ -197,11 +203,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.edt_setA.setText(str(bin_rel.A)[1:-1])
         self.edt_setR.setText(str(bin_rel.R)[1:-1])
 
-    def error_handle(self, err_type):
+    def error_handle(self, err_text):
         self.error_msg = QMessageBox()
         self.error_msg.setIcon(QMessageBox.Icon.Critical)
         self.error_msg.setText("Ошибка")
-        self.error_msg.setInformativeText(str(err_type))
+        self.error_msg.setInformativeText(str(err_text))
         self.error_msg.setWindowTitle("Ошибка")
         self.error_msg.exec()
 
