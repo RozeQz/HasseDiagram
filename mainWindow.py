@@ -133,8 +133,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def input(self) -> list:  # Ввод данных
         rubbish_text = re.sub(r'\([^()]*\)', '', self.edt_setR.toPlainText())
         alnum_outta_brackets = re.search(r'\w|\d', rubbish_text)
-        if alnum_outta_brackets:
-            raise IOError("Некорректный ввод бинарного отношения.")
 
         A = list(map(str, re.split(r' *, *', ',' + self.edt_setA.toPlainText() + ',')))  # Ввод числового множества
         A = list(x for x in A if x != '')
@@ -148,7 +146,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if len(self.edt_setA.toPlainText()) == 0 or len(self.edt_setR.toPlainText()) == 0:
             raise IOError("Поля ввода не могут быть пустыми.")
 
-        if not R:
+        if re.findall(r'\) *\(', self.edt_setR.toPlainText()):
+            raise IOError("Некорректный ввод бинарного отношения. Пары должны вводиться через запятую.")
+
+        if alnum_outta_brackets or not R:
             raise IOError("Некорректный ввод бинарного отношения.")
 
         # Уникальные элементы в множестве пар, задающих бинарное отношение
@@ -177,7 +178,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for i in range(1, num_A + 1):
             A.append(i)
 
-        num_R = random.randrange(3, 10)
+        num_R = random.randrange(5, 10)
         for i in range(num_R):
             first = random.choice(A)
             second = random.choice(A)

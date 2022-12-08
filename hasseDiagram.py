@@ -38,17 +38,22 @@ class HasseDiagram:
         levels_dict = {}
         for k, v in list(dominance_dict.items()):
             if not v:
-                levels_dict.setdefault(1, []).append(k)  # уровень доминирования = 1, если элемент ни над кем не доминирует
+                levels_dict.setdefault(1, []).append(
+                    k)  # уровень доминирования = 1, если элемент ни над кем не доминирует
                 dominance_dict.pop(k)  # удаляем рассмотренную вершину
 
-        while dominance_dict:       # TODO: уменьшить вложенность
+        while dominance_dict:  # TODO: уменьшить вложенность
             for k, v in list(dominance_dict.items()):
                 for el in v:
                     for i in range(1, len(levels_dict) + 1):
                         if el in levels_dict[i]:
-                            levels_dict.setdefault(i + 1, []).append(k)  # если элемент доминирует над элементом под ним, то элемент находится на следующем уровне доминирования
+                            levels_dict.setdefault(i + 1, []).append(
+                                k)  # если элемент доминирует над элементом под ним, то элемент находится на следующем уровне доминирования
                             if len(v) > 1:
-                                dominance_dict[k].remove(el)  # удаляем рассмотренную вершину
+                                try:
+                                    dominance_dict[k].remove(el)  # удаляем рассмотренную вершину
+                                except:
+                                    pass
                             else:
                                 dominance_dict.pop(k)  # удаляем рассмотренную вершину
 
@@ -140,7 +145,7 @@ class HasseDiagram:
             "font_size": 15,
             "font_color": "black",
             "node_size": 1000,
-            "node_color": "tab:blue",   # 148aff tab:blue
+            "node_color": "tab:blue",  # 148aff tab:blue
             "edgecolors": "black",
             "with_labels": True,
             "width": 2
