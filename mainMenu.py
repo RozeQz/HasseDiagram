@@ -9,7 +9,6 @@ class MainMenu(QMainWindow, Ui_MainMenu):
         super().__init__(parent)
         self.setupUi(self)
 
-        self.parent = parent
         self.theory_dialog = None
 
         self.btn_create.clicked.connect(self.open_hasse)

@@ -21,11 +21,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
 
-        self.parent = parent
         self.error_msg = None
         self.help_msg = None
 
-        self.btn_run.clicked.connect(self.button_click)  # TODO: генеировать рандомное бинарное отношение порядка
+        self.btn_run.clicked.connect(self.button_click)
         self.btn_back.clicked.connect(lambda: self.return_to_mainmenu(parent))
         self.btn_help.clicked.connect(self.open_help)
         self.btn_gen.clicked.connect(self.input_random_order)

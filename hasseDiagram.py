@@ -140,6 +140,8 @@ class HasseDiagram:
               self.__bin_rel.second_elements(self.__get_dominance_list(), reverse=True))
         G.add_edges_from(self.__get_dominance_list())
 
+        print(self.__dominance_levels())
+
         options = {
             "arrowsize": 18,
             "font_size": 15,

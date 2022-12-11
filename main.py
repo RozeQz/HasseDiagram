@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import QApplication
 from mainMenu import MainMenu
 
 
-def ui_application():
+def main():
     app = QApplication(sys.argv)
     window = MainMenu()
     window.show()
@@ -11,4 +11,4 @@ def ui_application():
 
 
 if __name__ == '__main__':
-    ui_application()
+    main()
