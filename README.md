@@ -17,15 +17,18 @@ _Диаграмма Хассе_ – это графическое предста
 
 Вам понадобятся *Python **3.9+*** и *pip **21.3.1+***
 
-1. Для начала склонируйте проект командой `git clone https://github.com/RozeQz/HasseDiagram.git`.
+1. Для начала склонируйте проект, прописав в терминале команду:
+   ```
+   git clone https://github.com/RozeQz/HasseDiagram.git
+   ```
 
 2. Находясь в корневом каталоге проекта, пропишите в терминале следующее:
-    ```
-    python -m venv venv
-    venv\Scripts/\activate
-    pip install -r requirements.txt
-    deactivate
-    ```
+   ```
+   python -m venv venv
+   venv\Scripts\activate
+   pip install -r requirements.txt
+   deactivate
+   ```
 
 ## Запуск
 
