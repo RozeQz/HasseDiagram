@@ -200,19 +200,16 @@ class BinaryRelation:
             if self.is_reflexive():
                 if self.is_antisymm():
                     return "partial order"
-                else:
-                    return "preorder"
+                return "preorder"
             elif self.is_irreflexive():
                 if self.is_antisymm():
                     return "strict order"
-                else:
-                    return "strict preorder"
+                return "strict preorder"
         else:
             if self.is_reflexive() and self.is_symmetrical():
                 if self.is_transitive():
                     return "equivalence"
-                else:
-                    return "tolerance"
+                return "tolerance"
             else:
                 return "unknown"
 

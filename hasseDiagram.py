@@ -83,7 +83,7 @@ class HasseDiagram:
         # чистим доминирование сверху вниз
         nodes = set()
         for k, v in list(reversed(levels_dict.items())):
-            temp_level = list()
+            temp_level = []
             for el in v:
                 if el in nodes:
                     temp = []

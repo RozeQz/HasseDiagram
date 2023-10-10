@@ -1,15 +1,16 @@
 import re
 import random
-import matplotlib.pyplot as plt
 import warnings
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
-    plt.rcParams['toolbar'] = 'toolmanager'
+import matplotlib.pyplot as plt
 from PyQt6 import QtCore, QtGui
 from PyQt6.QtWidgets import QApplication, QMainWindow, QMessageBox
 from binaryRelation import BinaryRelation
 from hasseDiagram import HasseDiagram
 from ui_mainwindow import Ui_MainWindow
+
+plt.rcParams['toolbar'] = 'toolmanager'
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -215,8 +216,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             заданное перечислением пар R.
         '''
         num_A = random.randrange(3, 7)
-        A = list()
-        R = list()
+        A = []
+        R = []
         for i in range(1, num_A + 1):
             A.append(i)
 
