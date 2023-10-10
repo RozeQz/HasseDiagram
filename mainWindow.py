@@ -177,6 +177,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         return [A, R]
 
     def create_random_binary_relation(self) -> BinaryRelation:
+        '''
+            Создает случайное бинарное отношение на множестве A,
+            заданное перечислением пар R.
+        '''
         num_A = random.randrange(3, 7)
         A = list()
         R = list()
@@ -192,15 +196,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         return BinaryRelation(A, R)
 
     def input_random_order(self):
+        '''
+            Ввод в поля для ввода случайного бинарного отношения на множестве A,
+            заданное перечислением пар R, образующих отношение порядка.
+        '''
         bin_rel = self.create_random_binary_relation()
         bin_rel.make_order()
-        self.edt_setA.setText(str(bin_rel.A)[1:-1])
-        self.edt_setR.setText(str(bin_rel.R)[1:-1])
+        # Переводим список в валидную строку для ввода
+        self.edt_setA.setText(", ".join(map(str, bin_rel.A)))
+        self.edt_setR.setText(", ".join(map(str, bin_rel.R)))
 
     def input_random_binary_relation(self):
+        '''
+            Ввод в поля для ввода случайного бинарного отношения на множестве A,
+            заданное перечислением пар R.
+        '''
         bin_rel = self.create_random_binary_relation()
-        self.edt_setA.setText(str(bin_rel.A)[1:-1])
-        self.edt_setR.setText(str(bin_rel.R)[1:-1])
+        # Переводим список в валидную строку для ввода
+        self.edt_setA.setText(", ".join(map(str, bin_rel.A)))
+        self.edt_setR.setText(", ".join(map(str, bin_rel.R)))
 
     def error_handle(self, err_text):
         self.error_msg = QMessageBox()
