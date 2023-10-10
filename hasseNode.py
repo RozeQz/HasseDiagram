@@ -1,5 +1,8 @@
-# Класс вершины Диаграммы Хассе
 class HasseNode:
+    '''
+    Класс вершины диаграммы Хассе.
+    Вся информация о названии вершины, её позиции и параметрах.
+    '''
     def __init__(self, name, pos, level, options=None):
         # self._options = options if options is not None else {"node_color": "tab:blue"} #148aff tab:blue
         self.__name = name
@@ -7,7 +10,7 @@ class HasseNode:
         self.__level = level
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self.__name
 
     @name.setter
@@ -15,7 +18,7 @@ class HasseNode:
         self.__name = n
 
     @property
-    def pos(self):
+    def pos(self) -> tuple:
         return self.__pos
 
     @pos.setter
@@ -23,7 +26,7 @@ class HasseNode:
         self.__pos = p
 
     @property
-    def level(self):
+    def level(self) -> int:
         return self.__level
 
     @level.setter

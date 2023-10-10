@@ -3,8 +3,11 @@ import random
 import numpy as np
 
 
-# Класс Бинарного отношения
 class BinaryRelation:
+    '''
+    Класс бинарного отношения.
+    Все про свойства бинарного отношения, множества и отношения порядка.
+    '''
     def __init__(self, a, r):
         self.__A = []
         self.__R = []
@@ -17,6 +20,9 @@ class BinaryRelation:
 
     @property
     def R(self) -> list:
+        '''
+        Множество пар, задающих бинарное отношение.
+        '''
         return self.__R
 
     @R.setter
@@ -28,6 +34,9 @@ class BinaryRelation:
 
     @property
     def A(self) -> list:
+        '''
+        Множество, на котором задано бинарное отношение.
+        '''
         return self.__A
 
     @A.setter
@@ -39,6 +48,9 @@ class BinaryRelation:
 
     # Матричное представление бинарного отношения
     def get_matrix(self):
+        '''
+        Получить матричное представление бинарного отношения.
+        '''
         matrix = np.zeros((len(self.__A), len(self.__A)), dtype=int)
         arr = list(self.A)
         for (row, col) in self.R:
@@ -47,22 +59,37 @@ class BinaryRelation:
 
     # Транспонированная матрица
     def get_transposed_matrix(self):
+        '''
+        Получить транспонированное матричное представление бинарного отношения.
+        '''
         return self.get_matrix().T
 
     # Рефлексивность
     def is_reflexive(self) -> bool:
+        '''
+        Проверить бинарное отношение на рефлексивность.
+        '''
         return set(self.get_matrix().diagonal()) == {1}
 
     # Иррефлексивность
     def is_irreflexive(self) -> bool:
+        '''
+        Проверить бинарное отношение на иррефлексивность.
+        '''
         return set(self.get_matrix().diagonal()) == {0}
 
     # Симметричность
     def is_symmetrical(self) -> bool:
+        '''
+        Проверить бинарное отношение на симметричность.
+        '''
         return (self.get_matrix().T == self.get_matrix()).all()
 
     # Транзитивность
     def is_transitive(self) -> bool:
+        '''
+        Проверить бинарное отношение на транзитивность.
+        '''
         second_elements = {b for (a, b) in self.R}  # множество вторых элементов
         for (a, b) in self.R:
             for c in second_elements:
@@ -72,6 +99,9 @@ class BinaryRelation:
 
     # Антисимметричность
     def is_antisymm(self) -> bool:
+        '''
+        Проверить бинарное отношение на антисимметричность.
+        '''
         for x in range(len(self.A)):
             for y in range(x, len(self.A)):
                 if self.get_matrix()[x][y] and self.get_matrix()[y][x]:
@@ -81,16 +111,25 @@ class BinaryRelation:
 
     # Является ли порядком
     def is_order(self) -> bool:
+        '''
+        Проверить, является ли бинарное отношение отношением порядка.
+        '''
         return self.is_transitive() and not self.is_symmetrical() and (self.is_reflexive() or self.is_irreflexive())
 
     # Сделать отношение рефлексивным
     def make_reflexive(self):
+        '''
+        Сделать бинарное отношение рефлексивным.
+        '''
         if not self.is_reflexive():
             for k in self.A:
                 if (k, k) not in self.R:
                     self.R.append((k, k))
 
     def make_irreflexive(self):
+        '''
+        Сделать бинарное отношение иррефлексивным.
+        '''
         if not self.is_irreflexive():
             for k in self.A:
                 if (k, k) in self.R:
@@ -98,6 +137,9 @@ class BinaryRelation:
 
     # Сделать отношение антисимметричным
     def make_antisymmetric(self):
+        '''
+        Сделать бинарное отношение антисимметричным.
+        '''
         if not self.is_antisymm():
             for (x, y) in self.R:
                 for (a, b) in self.R:
@@ -106,6 +148,9 @@ class BinaryRelation:
 
     # Сделать отношение несимметричным
     def make_not_symmetrical(self):
+        '''
+        Сделать бинарное отношение несимметричным.
+        '''
         while self.is_symmetrical():
             for (x, y) in self.R:
                 if (x != y) and ((y, x) in self.R):
@@ -116,6 +161,9 @@ class BinaryRelation:
 
     # Сделать отношение транзитивным
     def make_transitive(self):
+        '''
+        Сделать бинарное отношение транзитивным.
+        '''
         if not self.is_transitive():
             for (a, b) in self.R:
                 for (c, d) in self.R:
@@ -124,6 +172,9 @@ class BinaryRelation:
 
     # Сделать отношением порядка
     def make_order(self):
+        '''
+        Сделать бинарное отношение отношением порядка.
+        '''
         while not self.is_order():
             counter = 0
             while not self.is_order() and counter < 5:
@@ -139,6 +190,12 @@ class BinaryRelation:
 
     # Классы бинарных отношений
     def class_of_relation(self) -> str:
+        '''
+        Определяет класс бинарного отношения.
+
+        Returns:
+            Строка, содержащая класс бинарного отношения.
+        '''
         if self.is_order():
             if self.is_reflexive():
                 if self.is_antisymm():
@@ -162,6 +219,16 @@ class BinaryRelation:
     # Словарь вторых элементов пары (key = первый элемент пары; value = массив вторых элементов)
     # reverse=True - словарь первых элементов пары
     def second_elements(self, ls, reverse=False) -> dict:
+        '''
+        Фильтрация вторых (первых) элементов списка пар.
+
+        Args:
+            ls: Список пар, задающих бинарное отношение.
+            reverse: Флаг направления. reverse=True - словарь первых элементов пары
+
+        Returns:
+            Словарь вторых элементов пары (key = первый элемент пары; value = массив вторых элементов).
+        '''
         result = {}
         for i in self.A:
             result.setdefault(i, [])

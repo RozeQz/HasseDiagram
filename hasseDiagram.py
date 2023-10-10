@@ -5,14 +5,22 @@ DIAGRAM_HEIGHT = 50
 DIAGRAM_WIDTH = 50
 
 
-# Класс Диаграммы Хассе
 class HasseDiagram:
+    '''
+    Класс диаграммы Хассе.
+    Вся логика построения и рисования происходит тут.
+    '''
+
     # Используется агрегация (HasseDiagram не может существовать без BinaryRelation)
     def __init__(self, bin_rel):
         self.__bin_rel = bin_rel
 
     # Массив доминирования (соединения на диаграмме Хассе)
     def __get_dominance_list(self) -> list:
+        '''
+        Алгоритм нахождения пар доминирования.
+        На диаграмме Хассе это ребра. Все лишние пары, не являющиеся доминирование убираются.
+        '''
         edge_list = self.__bin_rel.R
         new_edge_list = edge_list.copy()
 
@@ -34,6 +42,9 @@ class HasseDiagram:
 
     # Словарь уровней доминирования (key = уровень; value = массив вершин)
     def __dominance_levels(self) -> dict:
+        '''
+        Алгоритм нахождения уровней доминирования для каждой вершины.
+        '''
         dominance_dict = dict(sorted(self.__bin_rel.second_elements(self.__get_dominance_list(), reverse=True).items()))
         levels_dict = {}
         for k, v in list(dominance_dict.items()):
@@ -98,6 +109,9 @@ class HasseDiagram:
 
     # private метод создания вершин диаграммы
     def __create_nodes(self):
+        '''
+        Создать вершины HasseNode с нужными параметрами.
+        '''
         self.__nodes = []
         delta_height = DIAGRAM_HEIGHT / len(self.__dominance_levels())
         for k, v in self.__dominance_levels().items():
@@ -109,12 +123,18 @@ class HasseDiagram:
 
     # Словарь для метода draw библиотеки networkx
     def __get_nodes_to_draw(self) -> dict:
+        '''
+        Получить вершины для построения диаграммы Хассе.
+        '''
         position = {}
         for x in self.__nodes:
             position.setdefault(x.name, x.pos)
         return position
 
     def get_nodes_by_level(self, lvl) -> list:
+        '''
+        Получить список вершин по уровню доминирования.
+        '''
         arr = []
         for x in self.__nodes:
             if x.level == lvl:
@@ -122,14 +142,23 @@ class HasseDiagram:
         return arr
 
     def get_node_by_name(self, n) -> HasseNode:
+        '''
+        Получить вершину по её названию.
+        '''
         for x in self.__nodes:
             if x.name == n:
                 return x
 
     def get_bin_rel(self):
+        '''
+        Получить бинарное отношение.
+        '''
         return self.__bin_rel
 
     def draw(self):
+        '''
+        Нарисовать диаграмму Хассе.
+        '''
         self.__create_nodes()  # задаем позиции вершин
 
         G = nx.Graph()

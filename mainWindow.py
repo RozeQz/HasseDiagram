@@ -12,7 +12,6 @@ from hasseDiagram import HasseDiagram
 from ui_mainwindow import Ui_MainWindow
 
 
-# Закрытие окна создания диаграммы Хассе
 class MainWindow(QMainWindow, Ui_MainWindow):
     window_closed = QtCore.pyqtSignal()
     number_of_diagrams = 0
@@ -35,15 +34,31 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     @staticmethod
     def create_diagram(bin_rel) -> HasseDiagram:
+        '''
+        Создает диаграмму Хассе по заданному бинарному отношению (отношению порядка).
+
+        Args:
+            bin_rel: Отношение порядка, по которому содается диаграмма Хассе.
+
+        Returns:
+            Диаграмма Хассе HasseDiagram(bin_rel), где bin_rel - отношение порядка.
+        '''
         print("Диаграмма хассе на множестве ", bin_rel.A)
         return HasseDiagram(bin_rel)
 
     def resize_event(self):
+        '''
+        Меняет размер окна.
+        '''
         self.resize(410, 410)
         self.setMinimumSize(QtCore.QSize(410, 410))
         self.setMaximumSize(QtCore.QSize(410, 410))
 
     def output(self):
+        '''
+        Выводит на экран свойства заданного бинарного отношения.
+        Выводит диаграмму Хассе, если бинарное отношение является отношением порядка.
+        '''
         try:
             binary = self.create_binary_relation()
 
@@ -124,12 +139,30 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.error_handle(e)
 
     def button_click(self):
+        '''
+        Обработчик нажатия на кнопку "Выполнить".
+        '''
         self.output()
 
     def create_binary_relation(self) -> BinaryRelation:
+        '''
+        Создает бинарное отношение на тех данных, что были записаны в поля для ввода.
+
+        Returns:
+            BinaryRelation(A, R), где A, R - записаны в поля для ввода.
+        '''
         return BinaryRelation(*self.input())
 
-    def input(self) -> list:  # Ввод данных
+    def input(self) -> list:
+        '''
+        Валидатор и парсер ввода данных.
+
+        Returns:
+            Список [A, R], где A - само множество, R - список пар, задающих бинарное отношение на этом множестве.
+
+        Raises:
+            IOError: Если был некорректный ввод данных.
+        '''
         rubbish_text = re.sub(r'\([^()]*\)', '', self.edt_setR.toPlainText())
         alnum_outta_brackets = re.search(r'\w|\d', rubbish_text)
 
@@ -195,28 +228,41 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         return BinaryRelation(A, R)
 
+    def bin_rel_to_valid_input(self, bin_rel):
+        '''
+        Конвертация и ввод бинарного отношения
+        BinaryRelation(A, R) в поля для ввода.
+
+        Args:
+            bin_rel: Бинарное отношение, которое нужно распарсить и вывести.
+        '''
+        self.edt_setA.setText(", ".join(map(str, bin_rel.A)))
+        self.edt_setR.setText(", ".join(map(str, bin_rel.R)))
+
     def input_random_order(self):
         '''
-            Ввод в поля для ввода случайного бинарного отношения на множестве A,
-            заданное перечислением пар R, образующих отношение порядка.
+        Ввод в поля для ввода случайного бинарного отношения на множестве A,
+        заданное перечислением пар R, образующих отношение порядка.
         '''
         bin_rel = self.create_random_binary_relation()
         bin_rel.make_order()
-        # Переводим список в валидную строку для ввода
-        self.edt_setA.setText(", ".join(map(str, bin_rel.A)))
-        self.edt_setR.setText(", ".join(map(str, bin_rel.R)))
+        self.bin_rel_to_valid_input(bin_rel)
 
     def input_random_binary_relation(self):
         '''
-            Ввод в поля для ввода случайного бинарного отношения на множестве A,
-            заданное перечислением пар R.
+        Ввод в поля для ввода случайного бинарного отношения на множестве A,
+        заданное перечислением пар R.
         '''
         bin_rel = self.create_random_binary_relation()
-        # Переводим список в валидную строку для ввода
-        self.edt_setA.setText(", ".join(map(str, bin_rel.A)))
-        self.edt_setR.setText(", ".join(map(str, bin_rel.R)))
+        self.bin_rel_to_valid_input(bin_rel)
 
     def error_handle(self, err_text):
+        '''
+        Окно ошибки.
+
+        Args:
+            err_text: Сообщение ошибки для отображения пользователю.
+        '''
         self.error_msg = QMessageBox()
         self.error_msg.setIcon(QMessageBox.Icon.Critical)
         self.error_msg.setText("Ошибка")
@@ -225,10 +271,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.error_msg.exec()
 
     def return_to_mainmenu(self, menu):
+        '''
+        Возврат к начальному окну приложения.
+
+        Args:
+            menu: Объект начального окна приложения.
+        '''
         self.close()
         menu.setVisible(True)
 
     def open_help(self):
+        '''
+        Окно справки по вводу данных.
+        '''
         if self.help_msg is None:
             self.help_msg = QMessageBox()
             self.help_msg.setIcon(QMessageBox.Icon.Information)

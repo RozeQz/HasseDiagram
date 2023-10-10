@@ -34,15 +34,24 @@ class MainMenu(QMainWindow, Ui_MainMenu):
             event.ignore()
 
     def open_hasse(self):
+        '''
+        Открыть окно приложения с построением диаграммы Хассе.
+        '''
         window = MainWindow(self)
         window.window_closed.connect(self.open_mainmenu)
         window.show()
         self.setVisible(False)
 
     def open_mainmenu(self):
+        '''
+        Открыть начальное окно приложения.
+        '''
         self.setVisible(True)
 
     def open_theory(self):
+        '''
+        Открыть окно приложения со справочными материалами по теории множеств.
+        '''
         if self.theory_dialog is None:
             self.theory_dialog = QDialog()
             ui = Ui_TheoryDialog()
